@@ -15,7 +15,7 @@ config.capabilities = [
 ];
 
 config.specs = [
-    './test/specs/**/google.e2e.js'
+    './test/specs/**/training.e2e.js'
 ];
 
 exports.config = config;

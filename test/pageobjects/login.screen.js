@@ -22,7 +22,7 @@ class loginScreen {
 
 
     enterEmailValue (emailId) {
-        browser.pause(10000);
+        browser.pause(5000);
         console.log("current context is: " + browser.getContexts());
         // this.emailTxtBox.waitForExist({timeout: 60000});
         this.emailTxtBox.click();

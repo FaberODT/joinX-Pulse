@@ -11,7 +11,7 @@ config.capabilities = [{
   captureScreenshots: true,
   browserName:        'chrome',
   deviceGroup:        'KOBITON',
-  deviceName:         'Galaxy S10+',
+  deviceName:         'OnePlus6T',
   platformName:       'Android'
 }]
 
