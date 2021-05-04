@@ -11,6 +11,8 @@ class nmcScreen {
     get saveAndContinueBtn () { return $('//button[@id="saveButton"]')}
 
     get nmcStatus () { return $('//div[@id="statusMessageHeader"]/span')}
+
+    get nmcMsg () { return $('//div[@id="statusMessageContent"]')}
     
     assertNMCCheckPageHeader () {
         this.pageHeaderLbl.waitForExist({timeout: 60000});
@@ -36,6 +38,11 @@ class nmcScreen {
         else{
 
         }
+    }
+
+    assertNMCMessage () {
+        this.nmcMsg.waitForExist({timeout: 60000});
+        expect(this.nmcMsg.getText()).to.equal("Thank you – your NMC check has been successful. You simply need to sign your indemnity insurance document to complete this section.");
     }
 }
 module.exports = new nmcScreen();

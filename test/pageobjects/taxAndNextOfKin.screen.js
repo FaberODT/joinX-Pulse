@@ -16,7 +16,11 @@ class taxAndNextOfKinScreen {
 
     get relationshipTxtBox () { return $('//input[@id="NextOfKin-0-NextOfKinRelationship"]')}
 
+    get umbrellaCompanyNameTxtBox () { return $('//input[@id="UmbreallaCompanyName"]')}
+
     get saveBtn () { return $('//button[@id="saveButton"]')}
+
+    get sectionStatus () { return $('//div[@id="statusMessageHeader"]/span')}
 
     assertTaxAndNextOfKinPageHeader () {
         this.pageHeaderLbl.waitForExist({timeout: 60000});
@@ -58,11 +62,33 @@ class taxAndNextOfKinScreen {
         this.relationshipTxtBox.setValue(relation);
     }
 
+    enterUmbrellaCompanyName (companyName) {
+        this.umbrellaCompanyNameTxtBox.waitForExist({timeout: 60000});
+        this.umbrellaCompanyNameTxtBox.setValue(companyName);
+    }
+
     clickOnSaveAndContinueBtn () {
         this.saveBtn.waitForExist({timeout: 60000});
         this.saveBtn.click();
     }
 
-    
+    assertSectionStatus () {
+        this.sectionStatus.waitForExist({timeout: 60000});
+        expect(this.sectionStatus.getText()).to.equal("Complete");
+    }
+
+    fetchPAYEValues () {
+        this.firstNameTxtBox.waitForExist({timeout: 60000});
+        expect(this.firstNameTxtBox.getValue()).to.equal("Nimesh");
+        expect(this.lastNameTxtBox.getValue()).to.equal("Bhatt");
+        expect(this.phoneTxtBox.getValue()).to.equal("07912345678");
+        expect(this.relationshipTxtBox.getValue()).to.equal("Friend");
+
+    }
+
+    fetchUmbrellaCompanyName () {
+        this.umbrellaCompanyNameTxtBox.waitForExist({timeout: 60000});
+        expect(this.umbrellaCompanyNameTxtBox.getValue()).to.equal("Umbrella!");
+    }
 }
 module.exports = new taxAndNextOfKinScreen();

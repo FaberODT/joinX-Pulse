@@ -15,6 +15,11 @@ class dashBoardScreen {
     }
 
     clickOnNMCCheckSection () {
+        browser.touchAction([
+            { action: 'press', x: 700, y: 2400 },
+            { action: 'moveTo', x: 700, y: 1000 },
+            'release'
+        ])
         this.nmcCheckSection.waitForExist({timeout: 60000});
         this.nmcCheckSection.click();
     }

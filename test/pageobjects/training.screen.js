@@ -16,9 +16,12 @@ class trainingScreen {
 
     get addFileBtn1 () { return $('//button[@id="add-file-TrainingDocument-0-TrainingCertificate"]')}
 
-    get addFile1 () { return $$('//input[@id="fileInput"]')}
+    // get addFile1 () { return $$('//input[@id="fileInput"]')}
 
-    // get addFile1 () { return $('//input[@id="fileInput"]')}
+    get addFile1 () { return $('//input[@id="fileInput"]')}
+
+    get addFileBtn () { return $('//button[@id="add-file-TrainingDocument-0-TrainingCertificate"]')}
+
     get addAnotherBtn () { return $('//button[@id="add-TrainingDocument"]')}
 
     get certificateType1 () { return $('//mat-select[@id="TrainingDocument-1-TrainingCertificateType"]')}
@@ -61,10 +64,15 @@ class trainingScreen {
     }
 
     uploadFile1 () {
-        this.addFile1[0].waitForExist({timeout: 60000});
-        // const filePath = 'C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg'
-        // const remoteFilePath = browser.uploadFile(filePath)
-        // browser.addValue(this.addFile1[0], 'C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg')
+        browser.touchAction([
+            { action: 'press', x: 700, y: 2400 },
+            { action: 'moveTo', x: 700, y: 600 },
+            'release'
+        ])
+        this.addFile1.waitForExist({timeout: 60000});
+        // const filePath = 'C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg';
+        // const remoteFilePath = browser.uploadFile(filePath);
+        // this.addFile1.addValue(remoteFilePath);
         
         // browser.execute(
         //     // assign style to elem in the browser
@@ -81,7 +89,11 @@ class trainingScreen {
         // browser.chooseFile(this.addFile1, filePath);
         // browser.addValue(this.addFile1[0], "C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg");
 
-        this.addFile1[0].setValue('C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg');
+        this.addFileBtn.click();
+        browser.pause(10000);
+        // browser.acceptAlert();
+        // browser.pause(2000);
+        this.addFile1.addValue('C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/test.png');
         // this.uploadFineBtn.fireEvent("onchange");
         // if ("createEvent" in browser) {
         //     var evt = browser.createEvent("HTMLEvents");
@@ -90,9 +102,9 @@ class trainingScreen {
         // }
         // else
         //     this.addFile1[0].dispatchEvent(new Event('change'));
-        this.addFile1[0].on('change', function() {
-            browser.pause(5000);
-        });
+        // this.addFile1[0].on('change', function() {
+        //     browser.pause(5000);
+        // });
         browser.pause(5000);
     }
 
