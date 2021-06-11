@@ -1,4 +1,3 @@
-const apiScreen = require('../test/helper/setupUser');
 var DataServices = function() {
 
     let email = "fabertester+nimesh001-e2e@gmail.com",

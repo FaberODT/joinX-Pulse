@@ -2,8 +2,6 @@ const expect = require("chai").expect;
 global.tag = process.argv[3];
 
 class trainingScreen {
-
-    // get dashboardLbl () { return $('//android.view.View[contains(@text, "Profile overview")]')}
     get pageHeaderLbl () { return $('//h1[@id="pageTitle"]')}
 
     get yesRadioBtn () { return $('//section[@id="TrainingCertificatesAvailable"]/label[1]/span')}
@@ -17,8 +15,6 @@ class trainingScreen {
     get addFileBtn1 () { return $('//button[@id="add-file-TrainingDocument-0-TrainingCertificate"]')}
 
     get addFileBtn2 () { return $('//button[@id="add-file-TrainingDocument-1-TrainingCertificate"]')}
-
-    // get addFile1 () { return $$('//input[@id="fileInput"]')}
 
     get addFile1 () { return $('//input[@id="fileInput"]')}
 
@@ -34,12 +30,8 @@ class trainingScreen {
 
     get trainingStatus () { return $('//div[@id="statusMessageHeader"]/span')}
 
-
-    // get allowOpt () {return $('//*[contains(@id,"permission_allow_button")]')}
-    // get allowOpt () {return $('//*[contains(@text,"Allow")]')}
     get allowOpt () {return $('/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.Button[1]')}
     get fileEle () { return $('//*[contains(@text,"Files")]')}
-    // get eleDoc () { return $('//*[contains(@id,"thumbnail")]')}
     get eleDoc () { return $('//*[contains(@text,"file.pdf")]')}
 
 

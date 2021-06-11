@@ -7,7 +7,6 @@ const sectionScreen = require('../pageobjects/sections.screen');
 const trainingScreen = require('../pageobjects/training.screen');
 
 describe('verify the google browser page', () => {
-    
     it('add certificate to training section - using API', () => {
         //following will fetch the acacium Auth Token
         apiScreen.getFaberAuthToken();
@@ -46,42 +45,41 @@ describe('verify the google browser page', () => {
         trainingScreen.assertTrainingSectionStatus();
     });
 
-    // it('add certificate to training section - traditional automation way', () => {
+    it('add certificate to training section - traditional automation way', () => {
         
-    //     //following will open browser and load the url
-    //     browser.url("https://e2e.joinpulse.co.uk");
+        //following will open browser and load the url
+        browser.url("https://e2e.joinpulse.co.uk");
 
-    //     //following will perform login 
-    //     loginScreen.loginIntoSite("fabertester+iqx_e6_midwives_mobileweb_chrome@gmail.com","Password123");
+        //following will perform login 
+        loginScreen.loginIntoSite("fabertester+iqx_e6_midwives_mobileweb_chrome@gmail.com","Password123");
 
-    //     // //following will assert dashboard screen
-    //     dashboardScreen.assertDashboardLbl();
+        // //following will assert dashboard screen
+        dashboardScreen.assertDashboardLbl();
 
-    //     sectionScreen.clickOnMenuBtn();
-    //     sectionScreen.clickOnProfileMenuOption();
+        sectionScreen.clickOnMenuBtn();
+        sectionScreen.clickOnProfileMenuOption();
 
-    //     //following will click on Training section
-    //     sectionScreen.clickOnTrainingSection();
+        //following will click on Training section
+        sectionScreen.clickOnTrainingSection();
 
-    //     //following will assert training screen
-    //     trainingScreen.assertTrainingPageHeader();
+        //following will assert training screen
+        trainingScreen.assertTrainingPageHeader();
 
-    //     //following will click on Yes radio button
-    //     trainingScreen.clickOnYesRadioBtn();
+        //following will click on Yes radio button
+        trainingScreen.clickOnYesRadioBtn();
 
-    //     //following will set up certificate
-    //     trainingScreen.clickOnCertificateTypeDrd();
-    //     trainingScreen.clickOnALSILSOption();
-    //     trainingScreen.uploadFile1();
+        //following will set up certificate
+        trainingScreen.clickOnCertificateTypeDrd();
+        trainingScreen.clickOnALSILSOption();
+        trainingScreen.uploadFile1();
 
-    //     //following will set up another certificate 
-    //     trainingScreen.clickOnAddAnotherBtn();
-    //     // browser.pause(50000);
-    //     trainingScreen.clickOnCertificateTypeDrd1();
-    //     trainingScreen.clickOnCounterFraudOption();
-    //     trainingScreen.uploadFile2();
+        //following will set up another certificate 
+        trainingScreen.clickOnAddAnotherBtn();
+        trainingScreen.clickOnCertificateTypeDrd1();
+        trainingScreen.clickOnCounterFraudOption();
+        trainingScreen.uploadFile2();
 
-    //     //following will click on Save and Continue button
-    //     trainingScreen.clickOnSaveAndContinueBtn();
-    // });
+        //following will click on Save and Continue button
+        trainingScreen.clickOnSaveAndContinueBtn();
+    });
 });

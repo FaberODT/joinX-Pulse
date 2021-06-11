@@ -21,8 +21,6 @@ class apiService {
         // response should have a true as a string
             expect(res.body).to.be.true;
             if (err) return err;
-            // if (err) return done(err);
-            // done();
         });
     }
 
@@ -37,8 +35,6 @@ class apiService {
             expect(res.body.access_token).to.not.equal(null);
             fabAccessToken = res.body.access_token;
             if (err) return err;
-            // if (err) return done(err);
-            // done();
         });
     }
 
@@ -53,8 +49,6 @@ class apiService {
             expect(res.body.access_token).to.not.equal(null);
             joinpulseAccessToken = res.body.access_token;
             if (err) return err;
-            // if (err) return done(err);
-            // done();
         });
     }
 
@@ -66,20 +60,17 @@ class apiService {
         .expect(204)
         .end((err, res) => {
             if(err) return err;
-            // if(err) return done(err);
-            // done();
         });
     }
 
     /**
-     * API will upload the file for Training Section
+     * API will upload the certificate for Training Section
      */
     uploadFileForTrainingSection() {
         console.log("I am in upload file api")
         joinpulse_fileUpload.post('/files/TrainingDocument/new/TrainingCertificate')
-        // .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${joinpulseAccessToken}`)
-        .attach('file', "C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/test.png")
+        .attach('file', process.cwd() + "/app/test.png")
         .expect(200)
         .end((err, res) => {
             fileUpload_responce[0] = res.body.file.fileName;
@@ -88,12 +79,13 @@ class apiService {
             fileUpload_responce[3] = res.body.stagingId;
             fileUpload_responce[4] = res.body.groupInstanceIds[0];
             trainingCertificates.push(fileUpload_responce);
-            console.log("File upload response array is: " + fileUpload_responce);
-            console.log("Training Certificate array is: " + trainingCertificates);
             if(err) return err;
         });
     }
 
+    /**
+     * API will save and continue the Training section
+     */
     saveAndContinueTrainingSection () {
         console.log("I am in save and continue api")
         joinpulse_fileUpload.patch(`?stagingId=${trainingCertificates[0][3]}`)
@@ -103,69 +95,7 @@ class apiService {
         .expect(204)
         .end((err, res) => {
             if(err) return err;
-            // if(err) return done(err);
-            // done();
         });
     }
 }
 module.exports = new apiService();
-// describe('Setup User:', () => {
-
-//   let fabAccessToken, joinpulseAccessToken;
-
-//   it('should delete the user information', (done) => {
-//     delete_user.post('')
-//         .set('Accept', 'application/json')
-//         .send(dataServices.getUserData())
-//         .expect(200)
-//         .end ((err, res) => {
-//           // response should have a true as a string
-//           expect(res.body).to.be.true;
-//           if (err) return done(err);
-//           done();
-//       });
-//   });
-
-//   it('should get user faber auth token', (done) => {
-//     fab_auth.post('/')
-//         .set('Accept', 'application/json')
-//         .send(dataServices.getUserInfo())
-//         .expect(200)
-//         .end ((err, res) => {
-//             // response should have a accessToken as a property 
-//             expect(res.body).to.have.property("access_token");
-//             expect(res.body.access_token).to.not.equal(null);
-//             fabAccessToken = res.body.access_token;
-//             if (err) return done(err);
-//             done();
-//         });
-//   });
-
-//   it('should get joinpulse auth token', (done) => {
-//     joinpulse_auth.post('')
-//         .set('Accept', 'application/json')
-//         .set('Authorization', `Bearer ${fabAccessToken}`)
-//         .expect(200)
-//         .end((err, res) => {
-//             // response should have a accessToken as a property 
-//             expect(res.body).to.have.property("access_token");
-//             expect(res.body.access_token).to.not.equal(null);
-//             joinpulseAccessToken = res.body.access_token;
-//             if (err) return done(err);
-//             done();
-//         });
-//   });
-
-//   it('should be able to update the user information', (done) => {
-//     import_user.patch('')
-//         .set('Accept', 'application/json')
-//         .set('Authorization', `Bearer ${joinpulseAccessToken}`)
-//         .send(dataServices.getUpdatedUserInfo())
-//         .expect(204)
-//         .end((err, res) => {
-//           if(err) return done(err);
-//           done();
-//         });
-//   });
-
-// });
