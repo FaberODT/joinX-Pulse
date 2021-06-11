@@ -19,6 +19,8 @@ class sectionScreen {
 
     get taxAndNextOfKinSection () { return $('//div[@id="navigation-section-list-item-tax-and-next-of-kin"]')}
 
+    get dbsDetailsSection () { return $('//div[@id="navigation-section-list-item-dbs-details"]')}
+
     clickOnMenuBtn () {
         this.menuBtn.waitForExist({timeout: 60000});
         this.menuBtn.click();
@@ -59,6 +61,11 @@ class sectionScreen {
     clickOnTaxAndNextOfKinSection () { 
         this.taxAndNextOfKinSection.waitForExist({timeout: 60000});
         this.taxAndNextOfKinSection.click();
+    }
+
+    clickOnDBSDetailsSection () {
+        this.dbsDetailsSection.waitForExist({timeout: 60000});
+        this.dbsDetailsSection.click();
     }
 
 }

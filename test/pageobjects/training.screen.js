@@ -16,6 +16,8 @@ class trainingScreen {
 
     get addFileBtn1 () { return $('//button[@id="add-file-TrainingDocument-0-TrainingCertificate"]')}
 
+    get addFileBtn2 () { return $('//button[@id="add-file-TrainingDocument-1-TrainingCertificate"]')}
+
     // get addFile1 () { return $$('//input[@id="fileInput"]')}
 
     get addFile1 () { return $('//input[@id="fileInput"]')}
@@ -29,6 +31,16 @@ class trainingScreen {
     get saveBtn () { return $('//button[@id="saveButton"]')}
 
     get uploadFineBtn () { return $('//button[@id="add-file-TrainingDocument-0-TrainingCertificate"]')}
+
+    get trainingStatus () { return $('//div[@id="statusMessageHeader"]/span')}
+
+
+    // get allowOpt () {return $('//*[contains(@id,"permission_allow_button")]')}
+    // get allowOpt () {return $('//*[contains(@text,"Allow")]')}
+    get allowOpt () {return $('/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.Button[1]')}
+    get fileEle () { return $('//*[contains(@text,"Files")]')}
+    // get eleDoc () { return $('//*[contains(@id,"thumbnail")]')}
+    get eleDoc () { return $('//*[contains(@text,"file.pdf")]')}
 
 
     assertTrainingPageHeader () {
@@ -68,86 +80,84 @@ class trainingScreen {
             { action: 'press', x: 700, y: 2400 },
             { action: 'moveTo', x: 700, y: 600 },
             'release'
-        ])
+        ]);
         this.addFile1.waitForExist({timeout: 60000});
-        // const filePath = 'C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg';
-        // const remoteFilePath = browser.uploadFile(filePath);
-        // this.addFile1.addValue(remoteFilePath);
-        
-        // browser.execute(
-        //     // assign style to elem in the browser
-        //     (el) => el.style.display = 'block',
-        //     // pass in element so we don't need to query it again in the browser
-        //     this.addFile1[0]
-        // );
-        // const path = require('path');
-        // const filePath = path.join(__dirname,'..', '..', 'fixtures', 'C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg');
-        // const remoteFilePath = browser.uploadFile(filePath).then(() => {
-        //     console.log("file uploaded");
-        // });
-        // this.addFile1[0].setValue(filePath);
-        // browser.chooseFile(this.addFile1, filePath);
-        // browser.addValue(this.addFile1[0], "C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg");
 
+        let data1 = new Buffer("Hello World").toString('base64');
+        driver.pushFile('/sdcard/download/file.pdf', data1);
+
+        //click on Add File button
         this.addFileBtn.click();
-        browser.pause(10000);
-        // browser.acceptAlert();
-        // browser.pause(2000);
-        this.addFile1.addValue('C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/test.png');
-        // this.uploadFineBtn.fireEvent("onchange");
-        // if ("createEvent" in browser) {
-        //     var evt = browser.createEvent("HTMLEvents");
-        //     evt.initEvent("change", false, true);
-        //     this.addFile1[0].dispatchEvent(evt);
-        // }
-        // else
-        //     this.addFile1[0].dispatchEvent(new Event('change'));
-        // this.addFile1[0].on('change', function() {
-        //     browser.pause(5000);
-        // });
         browser.pause(5000);
+
+        //Swith to NATIVE_APP 
+        let contexts = driver.getContexts();
+        console.log("Total contexts are: " + contexts);
+        console.log(" 0 contexts are: " + contexts[0]);
+        console.log(" 1 contexts are: " + contexts[1]);
+        driver.switchContext(contexts[0]);
+
+        //click on Allow button from pop-up
+        this.allowOpt.click();
+        browser.pause(5000);
+
+        //click on File
+        this.fileEle.click();
+        browser.pause(5000);
+
+        //select file 
+        this.eleDoc.click();
+        browser.pause(5000);
+        driver.switchContext(contexts[1]);
+        browser.pause(2000);
     }
 
     uploadFile2 () {
-        this.addFile1[1].waitForExist({timeout: 60000});
-        // const filePath = 'C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg';
-        // const remoteFilePath = browser.uploadFile(filePath);
-        // browser.addValue(this.addFile1[1], 'C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg')
-        // const path = require('path');
-        // const filePath = path.join(__dirname, 'C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg');
-        // const remoteFilePath = browser.uploadFile(filePath);
-        // this.addFile1[1].setValue(remoteFilePath);
-        // browser.chooseFile(this.addFile1[1], filePath);
-        // browser.addValue(this.addFile1[1], "C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg");
-        
-        
-        this.addFile1[1].setValue('C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/app/download.jpg');
-        // this.uploadFineBtn.fireEvent("onchange");
-        // if ("createEvent" in browser) {
-        //     var evt = browser.createEvent("HTMLEvents");
-        //     evt.initEvent("change", false, true);
-        //     this.addFile1[1].dispatchEvent(evt);
-        // }
-        // else
-        //     this.addFile1[1].dispatchEvent(new Event('change'));
-        this.addFile1[1].change(function() {
-            browser.pause(5000);
-        });
-        browser.pause(5000);
-    }
-
-    clickOnAddAnotherBtn () {
-        browser.pause(10000);
         browser.touchAction([
             { action: 'press', x: 700, y: 2400 },
             { action: 'moveTo', x: 700, y: 600 },
             'release'
-        ])
+        ]);
+        this.addFile1.waitForExist({timeout: 60000});
+
+        //click on Add File button
+        this.addFileBtn2.click();
+        browser.pause(5000);
+
+        //Swith to NATIVE_APP 
+        let contexts = driver.getContexts();
+        console.log("Total contexts are: " + contexts);
+        console.log(" 0 contexts are: " + contexts[0]);
+        console.log(" 1 contexts are: " + contexts[1]);
+        driver.switchContext(contexts[0]);
+
+        //click on Allow button from pop-up
+        // this.allowOpt.click();
+        // browser.pause(5000);
+
+        //click on File
+        this.fileEle.click();
+        browser.pause(5000);
+
+        //select file 
+        this.eleDoc.click();
+        browser.pause(5000);
+        driver.switchContext(contexts[1]);
+        browser.pause(2000);
+    }
+
+    clickOnAddAnotherBtn () {
         this.addAnotherBtn.waitForExist({timeout: 60000});
         this.addAnotherBtn.click();
     }
 
     clickOnCertificateTypeDrd1 () {
+        browser.touchAction([
+            { action: 'press', x: 700, y: 2400 },
+            { action: 'moveTo', x: 700, y: 600 },
+            'release'
+        ]);
+        browser.pause(1000);
         this.certificateType1.waitForExist({timeout: 60000});
         this.certificateType1.click();
     }
@@ -155,7 +165,17 @@ class trainingScreen {
     clickOnSaveAndContinueBtn () {
         this.saveBtn.waitForExist({timeout: 60000});
         this.saveBtn.click();
+        browser.pause(5000);
     }
 
+    assertTrainingSectionStatus () {
+        this.trainingStatus.waitForExist({timeout: 60000});
+        let statusValue = this.trainingStatus.getText();
+        if(statusValue == "Incomplete"){
+            expect(this.trainingStatus.getText()).to.equal("Incomplete");
+        }else{
+            expect(this.trainingStatus.getText()).to.equal("Complete");
+        }
+    }
 }
 module.exports = new trainingScreen();
