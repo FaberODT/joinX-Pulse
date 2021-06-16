@@ -7,34 +7,47 @@ const taxAndNextOfKinScreen = require('../pageobjects/taxAndNextOfKin.screen');
 
 
 describe('verify the google browser page', () => {
-    it('to verify the title of google page', () => {
-        //following will import worker's profile
+    it('Verify Tax and next kin section with LIMITED COMPANY payment option - using API', () => {
+        //following will fetch the acacium Auth Token
         apiScreen.getFaberAuthToken();
-        browser.pause(10000);
+        browser.pause(5000);
+
+        //following will fetch the JoinPulse Auth token
         apiScreen.getJoinPulseAuthToken();
-        browser.pause(10000);
-        apiScreen.uploadFileForTrainingSection();
-        browser.pause(10000);
-        // apiScreen.dataFromDataService();
-        // browser.pause(5000);
-        // apiScreen.uploadFileForTrainingSection();
-        // browser.pause(10000);
-        apiScreen.saveAndContinueTrainingSection();
-        browser.pause(10000);
+        browser.pause(5000);
 
-        // //following will open browser and load the url
-        // browser.url("https://e2e.joinpulse.co.uk");
+        //following will upload certificate for the Incorporation
+        apiScreen.uploadCertificateForIncorporationNextOfKin();
+        browser.pause(5000);
 
-        // //following will perform login 
-        // loginScreen.loginIntoSite("fabertester+nimesh001-e2e@gmail.com","Password123");
+        //following will upload certificate for the Business bank account
+        apiScreen.uploadCertificateForBusinessNextOfKin();
+        browser.pause(5000);
 
-        // // //following will assert dashboard screen
-        // dashboardScreen.assertDashboardLbl();
+        //following will save and continue the Next of the Kin section
+        apiScreen.saveAndContinueNextOfKinSection();
+        browser.pause(5000);
 
-        // sectionScreen.clickOnMenuBtn();
-        // sectionScreen.clickOnProfileMenuOption();
-        // sectionScreen.clickOnTrainingSection();
-        // browser.pause(10000);
+        //following will open browser and load the url
+        browser.url("https://e2e.joinpulse.co.uk");
+
+        //following will perform login 
+        loginScreen.loginIntoSite("fabertester+nimesh001-e2e@gmail.com","Password123");
+
+        // //following will assert dashboard screen
+        dashboardScreen.assertDashboardLbl();
+
+        //following will click on Menu button (Hamburger menu)
+        sectionScreen.clickOnMenuBtn();
+        sectionScreen.clickOnProfileMenuOption();
+        sectionScreen.clickOnTaxAndNextOfKinSection();
+        browser.pause(8000);
+ 
+        //following will assert that user is on Tax and next of kin screen
+        taxAndNextOfKinScreen.assertTaxAndNextOfKinPageHeader();
+        
+        //following will assert the status of the section
+        taxAndNextOfKinScreen.assertSectionStatus();
     });
 
     // it('Verify Tax and next kin section with PAYE payment option', () => {

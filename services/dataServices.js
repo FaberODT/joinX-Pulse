@@ -69,6 +69,49 @@ var DataServices = function() {
             }
         ]};
     }
+
+    this.getDBSSectionInfo = () => {
+        return {"sections": [
+            {
+                "id": "dbs-details",
+                "values": {
+                    "DBSUpdateRegistered": ["DBSUpdateYes"],
+                    "DBSUpdateCertificateNumber": ["009999999999"],
+                    "DBSUpdateCertificate": [
+                        {"fileName": `${dbsCertificates[0][0]}`, "fileSizeBytes": `${dbsCertificates[0][1]}`, "dateCreated": `${dbsCertificates[0][2]}`}
+                    ]
+                }
+            }]
+        }
+    }
+
+    this.getNextOfKinSectionInfo = () => {
+        return {"sections": [
+                {
+                    "id": "tax-and-next-of-kin",
+                    "values": {
+                        "TaxCollectionText": [""],
+                        "PaymentMethod": ["LTD"],
+                        "TextTaxAndNOK2": [""],
+                        "NextOfKin": [
+                            {
+                                "NextOfKinFirstName": ["Nimesh"],
+                                "NextOfKinSurName": ["Bhatt"],
+                                "NextOfKinRelationship": ["friend"],
+                                "NextOfKinPhone": ["+44123456789"]
+                            }
+                        ],
+                        "CertificateOfIncorporation": [
+                            {"fileName": `${incorporationCertiKin[0][0]}`, "fileSizeBytes": `${incorporationCertiKin[0][1]}`, "dateCreated": `${incorporationCertiKin[0][2]}`}
+                        ],
+                        "ProofOfBusinessBankAccount": [
+                            {"fileName": `${businessCertiKin[0][0]}`, "fileSizeBytes": `${businessCertiKin[0][1]}`, "dateCreated": `${businessCertiKin[0][2]}`}
+                        ]
+                    }
+                }
+            ]
+        }
+    }
 };
 
 module.exports = new DataServices();

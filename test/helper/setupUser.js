@@ -7,9 +7,12 @@ var expect = require('chai').expect,
   joinpulse_auth = supertest("https://e2e-joinpulse-api.joinpulse.co.uk/auth-server/v0/faber-token/from-auth0"),
   import_user = supertest("https://e2e-joinpulse-api.joinpulse.co.uk/profile-management-core/v0/import-profile/8bad8940-6ee2-425d-9f42-e4312cc1c219"),
   joinpulse_fileUpload = supertest("https://e2e-joinpulse-api.joinpulse.co.uk/profile-management-core/v1/my-profile"),
-  fabAccessToken = "", joinpulseAccessToken = "", fileUpload_responce = []; 
+  fabAccessToken = "", joinpulseAccessToken = "", fileUpload_responce = [], fileUpload_responce_DBS = [], fileUpload_incorporation_kin = [], fileUpload_business_kin = [];
   
 trainingCertificates = [];
+dbsCertificates = [];
+incorporationCertiKin = [];
+businessCertiKin = []; 
 
 class apiService {
     deleteUserData() {
@@ -64,10 +67,60 @@ class apiService {
     }
 
     /**
+     * API will upload the certificate for Incorporation
+     */
+    uploadCertificateForIncorporationNextOfKin () {
+        console.log("Joinpulse Auth token is: " + joinpulseAccessToken);
+        joinpulse_fileUpload.post('/files/CertificateOfIncorporation')
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .attach('file', process.cwd() + "/app/test.png")
+        .expect(200)
+        .end((err, res) => {
+            fileUpload_incorporation_kin[0] = res.body.file.fileName;
+            fileUpload_incorporation_kin[1] = res.body.file.fileSizeBytes;
+            fileUpload_incorporation_kin[2] = res.body.file.dateCreated;
+            fileUpload_incorporation_kin[3] = res.body.stagingId;
+            incorporationCertiKin.push(fileUpload_incorporation_kin);
+            if(err) return err;
+        });
+    }
+
+    /**
+     * API will upload the certificate for Business bank account
+     */
+    uploadCertificateForBusinessNextOfKin () {
+        joinpulse_fileUpload.post('/files/ProofOfBusinessBankAccount' + `?stagingId=${incorporationCertiKin[0][3]}`)
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .attach('file', process.cwd() + "/app/test.png")
+        .expect(200)
+        .end((err, res) => {
+            fileUpload_business_kin[0] = res.body.file.fileName;
+            fileUpload_business_kin[1] = res.body.file.fileSizeBytes;
+            fileUpload_business_kin[2] = res.body.file.dateCreated;
+            fileUpload_business_kin[3] = res.body.stagingId;
+            businessCertiKin.push(fileUpload_business_kin);
+            if(err) return err;
+        });
+    }
+
+    /**
+     * API will save and continue the Next of Kin section
+     */
+    saveAndContinueNextOfKinSection () {
+        joinpulse_fileUpload.patch(`?stagingId=${businessCertiKin[0][3]}`)
+        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .send(dataServices.getNextOfKinSectionInfo())
+        .expect(204)
+        .end((err, res) => {
+            if(err) return err;
+        });
+    }
+
+    /**
      * API will upload the certificate for Training Section
      */
     uploadFileForTrainingSection() {
-        console.log("I am in upload file api")
         joinpulse_fileUpload.post('/files/TrainingDocument/new/TrainingCertificate')
         .set('Authorization', `Bearer ${joinpulseAccessToken}`)
         .attach('file', process.cwd() + "/app/test.png")
@@ -82,16 +135,50 @@ class apiService {
             if(err) return err;
         });
     }
-
     /**
      * API will save and continue the Training section
      */
     saveAndContinueTrainingSection () {
-        console.log("I am in save and continue api")
         joinpulse_fileUpload.patch(`?stagingId=${trainingCertificates[0][3]}`)
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${joinpulseAccessToken}`)
         .send(dataServices.getTrainingSectionInfo())
+        .expect(204)
+        .end((err, res) => {
+            if(err) return err;
+        });
+    }
+
+    /**
+     * API will upload the certificate for DBS section
+     */
+    uploadCertificateForDBSSection() {
+        console.log("Joinpulse bearer token value: " + joinpulseAccessToken);
+        joinpulse_fileUpload.post('/files/DBSUpdateCertificate')
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .attach('file', process.cwd() + "/app/test.png")
+        .expect(200)
+        .end((err, res) => {
+            fileUpload_responce_DBS[0] = res.body.file.fileName;
+            fileUpload_responce_DBS[1] = res.body.file.fileSizeBytes;
+            fileUpload_responce_DBS[2] = res.body.file.dateCreated;
+            fileUpload_responce_DBS[3] = res.body.stagingId;
+            dbsCertificates.push(fileUpload_responce_DBS);
+            console.log("DBS certificates are: " + fileUpload_responce_DBS);
+            console.log("DBS certificates are: " + dbsCertificates);
+            if(err) return err;
+        });
+    }
+
+    /**
+     * API will save and continue the DBS section
+     */
+    saveAndContinueDBSSection () {
+        console.log("DBS certificates are: " + dbsCertificates);
+        joinpulse_fileUpload.patch(`?stagingId=${dbsCertificates[0][3]}`)
+        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .send(dataServices.getDBSSectionInfo())
         .expect(204)
         .end((err, res) => {
             if(err) return err;
