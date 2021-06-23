@@ -112,6 +112,47 @@ var DataServices = function() {
             ]
         }
     }
+
+    this.getRightToWorkChecksInfo = () => {
+        return {"sections": [
+                {
+                    "id": "right-to-work-checks",
+                    "values": {
+                        "TextPreEmploymentChecks": [
+                            ""
+                        ],
+                        "RightToWork": [
+                            {"fileName": `${rightToWorkChecks[0][0]}`, "fileSizeBytes": `${rightToWorkChecks[0][1]}`, "dateCreated": `${rightToWorkChecks[0][2]}`}
+                        ],
+                        "RightToWork2": [
+                            {"fileName": `${rightToWorkChecks[1][0]}`, "fileSizeBytes": `${rightToWorkChecks[1][1]}`, "dateCreated": `${rightToWorkChecks[1][2]}`}
+                        ],
+                        "TextProofOfAddress": [
+                            ""
+                        ],
+                        "ProofOfAddress": [
+                            {"fileName": `${rightToWorkChecks[2][0]}`, "fileSizeBytes": `${rightToWorkChecks[2][1]}`, "dateCreated": `${rightToWorkChecks[2][2]}`}
+                        ],
+                        "ProofOfAddress2": [
+                            {"fileName": `${rightToWorkChecks[3][0]}`, "fileSizeBytes": `${rightToWorkChecks[3][1]}`, "dateCreated": `${rightToWorkChecks[3][2]}`}
+                        ],
+                        "TextProofOfNameChange": [
+                            ""
+                        ],
+                        "NameChangeDocument": [
+                            ""
+                        ],
+                        "RightToWorkConsent": [
+                            true
+                        ],
+                        "TextSignDeclaration": [
+                            ""
+                        ]
+                    }
+                }
+            ]
+        }
+    }
 };
 
 module.exports = new DataServices();

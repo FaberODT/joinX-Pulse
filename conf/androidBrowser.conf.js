@@ -18,7 +18,7 @@ config.capabilities = [
 ];
 
 config.specs = [
-    './test/specs/**/taxAndNextOfKin.e2e.js'
+    './test/specs/**/rightToWorkChecks.e2e.js'
 ];
 
 exports.config = config;

@@ -21,6 +21,10 @@ class sectionScreen {
 
     get dbsDetailsSection () { return $('//div[@id="navigation-section-list-item-dbs-details"]')}
 
+    get referenceSection () { return $('//div[@id="navigation-section-list-item-references"]')}
+
+    get rightToWorkChecksSection () { return $('//div[@id="navigation-section-list-item-right-to-work-checks"]')}
+
     clickOnMenuBtn () {
         this.menuBtn.waitForExist({timeout: 60000});
         this.menuBtn.click();
@@ -68,5 +72,14 @@ class sectionScreen {
         this.dbsDetailsSection.click();
     }
 
+    clickOnReferenceSection () {
+        this.referenceSection.waitForExist({timeout: 60000});
+        this.referenceSection.click();
+    }
+
+    clickOnRightToWorkChecksSection () {
+        this.rightToWorkChecksSection.waitForExist({timeout: 60000});
+        this.rightToWorkChecksSection.click();
+    }
 }
 module.exports = new sectionScreen();

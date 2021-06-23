@@ -7,12 +7,14 @@ var expect = require('chai').expect,
   joinpulse_auth = supertest("https://e2e-joinpulse-api.joinpulse.co.uk/auth-server/v0/faber-token/from-auth0"),
   import_user = supertest("https://e2e-joinpulse-api.joinpulse.co.uk/profile-management-core/v0/import-profile/8bad8940-6ee2-425d-9f42-e4312cc1c219"),
   joinpulse_fileUpload = supertest("https://e2e-joinpulse-api.joinpulse.co.uk/profile-management-core/v1/my-profile"),
-  fabAccessToken = "", joinpulseAccessToken = "", fileUpload_responce = [], fileUpload_responce_DBS = [], fileUpload_incorporation_kin = [], fileUpload_business_kin = [];
+  fabAccessToken = "", joinpulseAccessToken = "", fileUpload_responce = [], fileUpload_responce_DBS = [], fileUpload_incorporation_kin = [], fileUpload_business_kin = [],
+  fileUpload_RWC1 = [], fileUpload_RWC2 = [], fileUpload_RWC3 = [], fileUpload_RWC4 = [];
   
 trainingCertificates = [];
 dbsCertificates = [];
 incorporationCertiKin = [];
 businessCertiKin = []; 
+rightToWorkChecks = [];
 
 class apiService {
     deleteUserData() {
@@ -148,6 +150,101 @@ class apiService {
             if(err) return err;
         });
     }
+
+
+    /**
+     * API will upload Supporting file 1 for Right to Work Checks section
+     */
+    uploadFile1ForRightToWorkChecksSection() {
+        console.log("Joinpulse Auth token is: " + joinpulseAccessToken);
+        joinpulse_fileUpload.post('/files/RightToWork')
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .attach('file', process.cwd() + "/app/test.png")
+        .expect(200)
+        .end((err, res) => {
+            fileUpload_RWC1[0] = res.body.file.fileName;
+            fileUpload_RWC1[1] = res.body.file.fileSizeBytes;
+            fileUpload_RWC1[2] = res.body.file.dateCreated;
+            fileUpload_RWC1[3] = res.body.stagingId;
+            rightToWorkChecks.push(fileUpload_RWC1);
+            console.log("right to check array is : " + rightToWorkChecks);
+            if(err) return err;
+        });
+    }
+
+    /**
+     * API will upload Supporting file 2 for Right to Work Checks section
+     */
+    uploadFile2ForRightToWorkChecksSection() {
+        console.log("rightToWorkChecks while uploaidng 2nd file: " + rightToWorkChecks);
+        joinpulse_fileUpload.post('/files/RightToWork2' + `?stagingId=${rightToWorkChecks[0][3]}`)
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .attach('file', process.cwd() + "/app/test.png")
+        .expect(200)
+        .end((err, res) => {
+            fileUpload_RWC2[0] = res.body.file.fileName;
+            fileUpload_RWC2[1] = res.body.file.fileSizeBytes;
+            fileUpload_RWC2[2] = res.body.file.dateCreated;
+            fileUpload_RWC2[3] = res.body.stagingId;
+            rightToWorkChecks.push(fileUpload_RWC2);
+            if(err) return err;
+        });
+    }
+
+    /**
+     * API will upload Supporting file 3 for Right to Work Checks section
+     */
+    uploadFile3ForRightToWorkChecksSection() {
+        console.log("rightToWorkChecks while uploaidng 3rd file: " + rightToWorkChecks);
+        joinpulse_fileUpload.post('/files/ProofOfAddress' + `?stagingId=${rightToWorkChecks[1][3]}`)
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .attach('file', process.cwd() + "/app/test.png")
+        .expect(200)
+        .end((err, res) => {
+            fileUpload_RWC3[0] = res.body.file.fileName;
+            fileUpload_RWC3[1] = res.body.file.fileSizeBytes;
+            fileUpload_RWC3[2] = res.body.file.dateCreated;
+            fileUpload_RWC3[3] = res.body.stagingId;
+            rightToWorkChecks.push(fileUpload_RWC3);
+            if(err) return err;
+        });
+    }
+
+
+    /**
+     * API will upload Supporting file 4 for Right to Work Checks section
+     */
+    uploadFile4ForRightToWorkChecksSection() {
+        console.log("rightToWorkChecks while uploaidng 4th file: " + rightToWorkChecks);
+        joinpulse_fileUpload.post('/files/ProofOfAddress2' + `?stagingId=${rightToWorkChecks[2][3]}`)
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .attach('file', process.cwd() + "/app/test.png")
+        .expect(200)
+        .end((err, res) => {
+            fileUpload_RWC4[0] = res.body.file.fileName;
+            fileUpload_RWC4[1] = res.body.file.fileSizeBytes;
+            fileUpload_RWC4[2] = res.body.file.dateCreated;
+            fileUpload_RWC4[3] = res.body.stagingId;
+            rightToWorkChecks.push(fileUpload_RWC4);
+            if(err) return err;
+        });
+    }
+
+    /**
+     * API will save and continue the RWC section
+     */
+    saveAndContinueRWCSection () {
+        console.log("rightToWorkChecks while saving the section: " + rightToWorkChecks);
+        joinpulse_fileUpload.patch(`?stagingId=${rightToWorkChecks[3][3]}`)
+        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .send(dataServices.getRightToWorkChecksInfo())
+        .expect(204)
+        .end((err, res) => {
+            if(err) return err;
+        });
+    }
+
 
     /**
      * API will upload the certificate for DBS section

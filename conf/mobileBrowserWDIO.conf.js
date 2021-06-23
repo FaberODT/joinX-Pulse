@@ -204,6 +204,8 @@ exports.config = {
         global.incorporationCertiKin;
 
         global.businessCertiKin;
+
+        global.rightToWorkChecks;
     },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
