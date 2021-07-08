@@ -47,6 +47,11 @@ class loginScreen {
         this.enterPasswordValue(password);
         this.clickOnLoginBtn();
     }
+
+    assertLoginScreen () {
+        this.loginBtn.waitForExist({timeout: 60000});
+        expect(this.loginBtn.isDisplayed()).to.equal(true);
+    }
 }
 
 module.exports = new loginScreen();

@@ -18,7 +18,7 @@ config.capabilities = [
 ];
 
 config.specs = [
-    './test/specs/**/rightToWorkChecks.e2e.js'
+    './test/specs/**/training.e2e.js'
 ];
 
 exports.config = config;

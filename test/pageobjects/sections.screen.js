@@ -25,9 +25,23 @@ class sectionScreen {
 
     get rightToWorkChecksSection () { return $('//div[@id="navigation-section-list-item-right-to-work-checks"]')}
 
+    get logoutBtn () { return $('//button[@id="nav-item-logout"]')}
+
+    get discardChangesBtn () { return $('//button[@id="discard-changes-button"]')}
+
     clickOnMenuBtn () {
         this.menuBtn.waitForExist({timeout: 60000});
         this.menuBtn.click();
+    }
+
+    clickOnLogoutBtn () { 
+        this.logoutBtn.waitForExist({timeout: 60000});
+        this.logoutBtn.click();
+    }
+
+    clickOnDiscardChangesBtn () {
+        this.discardChangesBtn.waitForExist({timeout: 60000});
+        this.discardChangesBtn.click();
     }
 
     clickOnProfileMenuOption () {

@@ -10,6 +10,8 @@ class trainingScreen {
     
     get ALSILSOption() { return $('//mat-option[@id="mat-option-1"]')}
 
+    get ALSILSOptionFromSecond() { return $('//mat-option[@id="mat-option-23"]')}
+
     get counterFraudOption() { return $('//mat-option[@id="mat-option-26"]')}
 
     get addFileBtn1 () { return $('//button[@id="add-file-TrainingDocument-0-TrainingCertificate"]')}
@@ -30,6 +32,16 @@ class trainingScreen {
 
     get trainingStatus () { return $('//div[@id="statusMessageHeader"]/span')}
 
+    get validationOnDuplicateCerti () { return $('//span[@class="validation-message"]')}
+
+    get deleteIconCertiFirst () { return $$('//div[@id="delete-TrainingDocument"]')}
+
+    get deleteIconCertiFirstConfirmation () { return $('//button[@id="deleteGroupButton"]')}
+
+    get checkBoxALS () { return $('//label[@for="CoreTrainingCertificates-ALSILS-1"]')}
+
+    get checkBoxCounterFraud () { return $('//input[@id = "CoreTrainingCertificates-CounterFraud-4"]')}
+
     get allowOpt () {return $('/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.Button[1]')}
     get fileEle () { return $('//*[contains(@text,"Files")]')}
     get eleDoc () { return $('//*[contains(@text,"file.pdf")]')}
@@ -39,6 +51,11 @@ class trainingScreen {
         this.pageHeaderLbl.waitForExist({timeout: 60000});
         browser.pause(3000);
         expect(this.pageHeaderLbl.getText()).to.equal("10. Training");
+    }
+
+    clickOnCertificateCheckBoxes () {
+        this.checkBoxALS.waitForExist({timeout: 60000});
+        this.checkBoxALS.click();
     }
 
     clickOnYesRadioBtn () {
@@ -57,6 +74,11 @@ class trainingScreen {
         this.ALSILSOption.click();
     }
 
+    clickOnALSILSOptionFromDiffCerti () {
+        this.ALSILSOptionFromSecond.waitForExist({timeout: 60000});
+        this.ALSILSOptionFromSecond.click();
+    }
+
     clickOnCounterFraudOption () {
         this.counterFraudOption.waitForExist({timeout: 60000});
         this.counterFraudOption.click();
@@ -65,6 +87,14 @@ class trainingScreen {
     clickOnAddFile1Btn () { 
         this.addFileBtn1.waitForExist({timeout: 60000});
         this.addFileBtn1.click();
+    }
+
+    scrollUp () {
+        browser.touchAction([
+            { action: 'press', x: 700, y: 2400 },
+            { action: 'moveTo', x: 700, y: 600 },
+            'release'
+        ]);
     }
 
     uploadFile1 () {
@@ -167,7 +197,22 @@ class trainingScreen {
             expect(this.trainingStatus.getText()).to.equal("Incomplete");
         }else{
             expect(this.trainingStatus.getText()).to.equal("Complete");
-        }
+        }``
+    }
+
+    assertValidationMessageOverDuplicateCerti () {
+        this.validationOnDuplicateCerti.waitForExist({timeout: 60000});
+        expect(this.validationOnDuplicateCerti.getText()).to.equal("Please select a different type of certificate. You have already selected ALS/ILS on another upload.");
+    }
+
+    clickFirstCertiDeleteIcon () {
+        this.deleteIconCertiFirst[0].waitForExist({timeout: 60000});
+        this.deleteIconCertiFirst[0].click();
+    }
+
+    clickCertiDeleteConfirmation () {
+        this.deleteIconCertiFirstConfirmation.waitForExist({timeout: 60000});
+        this.deleteIconCertiFirstConfirmation.click();
     }
 }
 module.exports = new trainingScreen();

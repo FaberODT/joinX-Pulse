@@ -7,7 +7,7 @@ var expect = require('chai').expect,
   joinpulse_auth = supertest("https://e2e-joinpulse-api.joinpulse.co.uk/auth-server/v0/faber-token/from-auth0"),
   import_user = supertest("https://e2e-joinpulse-api.joinpulse.co.uk/profile-management-core/v0/import-profile/8bad8940-6ee2-425d-9f42-e4312cc1c219"),
   joinpulse_fileUpload = supertest("https://e2e-joinpulse-api.joinpulse.co.uk/profile-management-core/v1/my-profile"),
-  fabAccessToken = "", joinpulseAccessToken = "", fileUpload_responce = [], fileUpload_responce_DBS = [], fileUpload_incorporation_kin = [], fileUpload_business_kin = [],
+  fabAccessToken = "", joinpulseAccessToken = "", fileUpload_responce = [], fileUpload_responce1 = [], fileUpload_responce_DBS = [], fileUpload_incorporation_kin = [], fileUpload_business_kin = [],
   fileUpload_RWC1 = [], fileUpload_RWC2 = [], fileUpload_RWC3 = [], fileUpload_RWC4 = [];
   
 trainingCertificates = [];
@@ -44,6 +44,7 @@ class apiService {
     }
 
     getJoinPulseAuthToken() {
+        console.log("Faber token : " + fabAccessToken);
         joinpulse_auth.post('')
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${fabAccessToken}`)
@@ -123,7 +124,8 @@ class apiService {
      * API will upload the certificate for Training Section
      */
     uploadFileForTrainingSection() {
-        joinpulse_fileUpload.post('/files/TrainingDocument/new/TrainingCertificate')
+        console.log("Joinpulse token: " + joinpulseAccessToken);
+        joinpulse_fileUpload.post('/files/ALSILS')
         .set('Authorization', `Bearer ${joinpulseAccessToken}`)
         .attach('file', process.cwd() + "/app/test.png")
         .expect(200)
@@ -134,19 +136,45 @@ class apiService {
             fileUpload_responce[3] = res.body.stagingId;
             fileUpload_responce[4] = res.body.groupInstanceIds[0];
             trainingCertificates.push(fileUpload_responce);
+            console.log("Training certificate after uploading 1 certificate: " + trainingCertificates);
             if(err) return err;
         });
     }
+
+    /**
+     * API will upload the certificate for Training Section
+     */
+    uploadFileForTrainingSection1() {
+        console.log("Training certificate after uploading 1 certificate: " + trainingCertificates);
+        joinpulse_fileUpload.post('/files/CounterFraud' + `?stagingId=${trainingCertificates[0][3]}`)
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .attach('file', process.cwd() + "/app/test.png")
+        .expect(200)
+        .end((err, res) => {
+            fileUpload_responce1[0] = res.body.file.fileName;
+            fileUpload_responce1[1] = res.body.file.fileSizeBytes;
+            fileUpload_responce1[2] = res.body.file.dateCreated;
+            fileUpload_responce1[3] = res.body.stagingId;
+            fileUpload_responce1[4] = res.body.groupInstanceIds[0];
+            trainingCertificates.push(fileUpload_responce1);
+            console.log("Training certificate after uploading 2 certificate: " + trainingCertificates);
+            if(err) return err;
+        });
+    }
+
+
     /**
      * API will save and continue the Training section
      */
     saveAndContinueTrainingSection () {
-        joinpulse_fileUpload.patch(`?stagingId=${trainingCertificates[0][3]}`)
+        console.log("Value of Staging id for save and continue: " + trainingCertificates[1][3]);
+        joinpulse_fileUpload.patch(`?stagingId=${trainingCertificates[1][3]}`)
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${joinpulseAccessToken}`)
         .send(dataServices.getTrainingSectionInfo())
         .expect(204)
         .end((err, res) => {
+            console.log("Saved now...!!!!!");
             if(err) return err;
         });
     }

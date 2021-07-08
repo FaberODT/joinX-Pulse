@@ -53,21 +53,28 @@ var DataServices = function() {
     }
 
     this.getTrainingSectionInfo = () => {
-        return {"sections": [
-            {
-                "id": "training",
-                "values": {
-                    "TrainingCertificatesAvailable": ["Yes"],
-                    "TrainingDocument": [
-                        {"_groupInstanceId": `${trainingCertificates[0][4]}`,"TrainingCertificateType": ["ALSILS"],
-                            "TrainingCertificate": [
-                                {"fileName": `${trainingCertificates[0][0]}`, "fileSizeBytes": `${trainingCertificates[0][1]}`, "dateCreated": `${trainingCertificates[0][2]}`}
-                            ]
-                        }
-                    ]
+        return {
+            "sections": [
+                {
+                    "id": "training",
+                    "values": {
+                        "TextTrainingCore": [
+                            ""
+                        ],
+                        "CoreTrainingCertificates": [
+                            "ALSILS",
+                            "CounterFraud"
+                        ],
+                        "ALSILS": [
+                            {"fileName": `${trainingCertificates[0][0]}`, "fileSizeBytes": `${trainingCertificates[0][1]}`, "dateCreated": `${trainingCertificates[0][2]}`}
+                        ],
+                        "CounterFraud": [
+                            {"fileName": `${trainingCertificates[1][0]}`, "fileSizeBytes": `${trainingCertificates[1][1]}`, "dateCreated": `${trainingCertificates[1][2]}`}
+                        ]
+                    }
                 }
-            }
-        ]};
+            ]
+        }
     }
 
     this.getDBSSectionInfo = () => {
