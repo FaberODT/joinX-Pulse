@@ -16,7 +16,7 @@ class dashBoardScreen {
 
     clickOnNMCCheckSection () {
         browser.touchAction([
-            { action: 'press', x: 700, y: 2400 },
+            { action: 'press', x: 700, y: 2200 },
             { action: 'moveTo', x: 700, y: 1000 },
             'release'
         ])

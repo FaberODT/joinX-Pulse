@@ -25,7 +25,7 @@ class dbsScreen {
         browser.pause(3000);
         expect(this.pageHeaderLbl.getText()).to.equal("5. DBS details");
         browser.touchAction([
-            { action: 'press', x: 700, y: 2400 },
+            { action: 'press', x: 700, y: 2200 },
             { action: 'moveTo', x: 700, y: 600 },
             'release'
         ]);
@@ -45,7 +45,7 @@ class dbsScreen {
 
     uploadFile1 () {
         browser.touchAction([
-            { action: 'press', x: 700, y: 2400 },
+            { action: 'press', x: 700, y: 2200 },
             { action: 'moveTo', x: 700, y: 600 },
             'release'
         ]);

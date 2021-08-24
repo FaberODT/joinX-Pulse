@@ -46,7 +46,7 @@ class taxAndNextOfKinScreen {
         browser.pause(2000);
         for(let i = 0; i < 3; i++){
             browser.touchAction([
-                { action: 'press', x: 1000, y: 2350 },
+                { action: 'press', x: 1000, y: 2250 },
                 { action: 'moveTo', x: 1000, y: 900 },
                 'release'
             ]);

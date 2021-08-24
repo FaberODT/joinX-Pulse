@@ -11,7 +11,7 @@ let platformNameValue, platformVersionValue, appValue;
 if(tag == "android"){
   platformNameValue = 'Android';
   platformVersionValue = '10.0';
-  appValue = 'C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/Quick Nurse/qn-mobile-app-smokepack/app/QN_08_01.apk';
+  appValue = process.cwd() + '/app/QN_08_01.apk';
 }
 else{
   platformNameValue = 'iOS';

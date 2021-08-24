@@ -1,10 +1,11 @@
+require('dotenv').config();
 exports.config = {
     user: 'nimeshbhatt',
     key: '750cc62f-43b8-48a1-b237-aa12487c9255',
     runner: 'local',
     framework: 'jasmine',
     jasmineNodeOpts: {
-        defaultTimeoutInterval: 90000
+        defaultTimeoutInterval: 2147483646
     },
     sync: false,
     logLevel: 'silent',
@@ -17,7 +18,7 @@ exports.config = {
     connectionRetryCount: 3,
     reporters: ['spec'],
     port: 443,
-    maxInstances: 1
+    maxInstances: 1,
     // beforeTest: () => {
     //   const chai = require('chai')
     //   const chaiWebdriver = require('chai-webdriverio').default

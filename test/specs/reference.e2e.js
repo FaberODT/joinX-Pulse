@@ -54,5 +54,12 @@ describe('verify the reference screen of JoinPulse', () => {
 
         //following will assert status of the References page
         refereneScreen.assertSectionStatus();
+
+        //following will perform logout operation
+        sectionScreen.clickOnMenuBtn();
+        sectionScreen.clickOnLogoutBtn();
+
+        //following will assert login screen
+        loginScreen.assertLoginScreen();
     });
 });

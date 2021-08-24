@@ -92,6 +92,38 @@ var DataServices = function() {
         }
     }
 
+    this.getReferencesInfo = () => {
+        return {"sections": [
+                {
+                    "id": "references",
+                    "values": {
+                        "TextReferences": [],
+                        "Reference": [
+                            {
+                                "RefereeName": ["Rio"],
+                                "Employer": ["PMC"],
+                                "TextReferencePeroid": [],
+                                "ReferencePeriodEndDate": ["1992-01-01"],
+                                "JobTitle": ["Senior"],
+                                "ReferencePeriodStartDate": ["1991-01-01"],
+                                "RefereeWorkEmailAddress": ["rio@test.com"]
+                            },
+                            {
+                                "RefereeName": ["Denver"],
+                                "Employer": ["PMC"],
+                                "TextReferencePeroid": [],
+                                "ReferencePeriodEndDate": ["1994-01-01"],
+                                "JobTitle": ["Senior"],
+                                "ReferencePeriodStartDate": ["1993-01-01"],
+                                "RefereeWorkEmailAddress": ["denver@test.com"]
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+
     this.getNextOfKinSectionInfo = () => {
         return {"sections": [
                 {
@@ -121,44 +153,63 @@ var DataServices = function() {
     }
 
     this.getRightToWorkChecksInfo = () => {
-        return {"sections": [
-                {
-                    "id": "right-to-work-checks",
-                    "values": {
-                        "TextPreEmploymentChecks": [
-                            ""
-                        ],
-                        "RightToWork": [
-                            {"fileName": `${rightToWorkChecks[0][0]}`, "fileSizeBytes": `${rightToWorkChecks[0][1]}`, "dateCreated": `${rightToWorkChecks[0][2]}`}
-                        ],
-                        "RightToWork2": [
-                            {"fileName": `${rightToWorkChecks[1][0]}`, "fileSizeBytes": `${rightToWorkChecks[1][1]}`, "dateCreated": `${rightToWorkChecks[1][2]}`}
-                        ],
-                        "TextProofOfAddress": [
-                            ""
-                        ],
-                        "ProofOfAddress": [
-                            {"fileName": `${rightToWorkChecks[2][0]}`, "fileSizeBytes": `${rightToWorkChecks[2][1]}`, "dateCreated": `${rightToWorkChecks[2][2]}`}
-                        ],
-                        "ProofOfAddress2": [
-                            {"fileName": `${rightToWorkChecks[3][0]}`, "fileSizeBytes": `${rightToWorkChecks[3][1]}`, "dateCreated": `${rightToWorkChecks[3][2]}`}
-                        ],
-                        "TextProofOfNameChange": [
-                            ""
-                        ],
-                        "NameChangeDocument": [
-                            ""
-                        ],
-                        "RightToWorkConsent": [
-                            true
-                        ],
-                        "TextSignDeclaration": [
-                            ""
-                        ]
-                    }
+        return {
+                    "sections": [
+                        {
+                            "id": "right-to-work-checks",
+                            "values": {
+                                "TextPreEmploymentChecks": [
+                                    ""
+                                ],
+                                "RightToWorkSelection": [
+                                    "RightToWorkUKPassport"
+                                ],
+                                "TextProofOfAddress": [
+                                    ""
+                                ],
+                                "ProofOfAddress1": [
+                                    "ProofOfAddressBankStatement"
+                                ],
+                                "ProofOfAddress2Select": [
+                                    "ProofOfAddress2UtilityBill"
+                                ],
+                                "TextProofOfNameChange": [
+                                    ""
+                                ],
+                                "NameChangeSelection": [
+                                    "No"
+                                ],
+                                "RightToWorkConsent": [
+                                    true
+                                ],
+                                "TextSignDeclaration": [
+                                    ""
+                                ],
+                                "RightToWorkUKPassport": [
+                                    {
+                                        "fileName": `${rightToWorkChecks1[0][0]}`,
+                                        "fileSizeBytes": `${rightToWorkChecks1[0][1]}`,
+                                        "dateCreated": `${rightToWorkChecks1[0][2]}`
+                                    }
+                                ],
+                                "ProofOfAddressBankStatement": [
+                                    {
+                                        "fileName": `${rightToWorkChecks2[0][0]}`,
+                                        "fileSizeBytes": `${rightToWorkChecks2[0][1]}`,
+                                        "dateCreated": `${rightToWorkChecks2[0][2]}`
+                                    }
+                                ],
+                                "ProofOfAddress2UtilityBill": [
+                                    {
+                                        "fileName": `${rightToWorkChecks3[0][0]}`,
+                                        "fileSizeBytes": `${rightToWorkChecks3[0][1]}`,
+                                        "dateCreated": `${rightToWorkChecks3[0][2]}`
+                                    }
+                                ]
+                            }
+                        }
+                    ]
                 }
-            ]
-        }
     }
 };
 

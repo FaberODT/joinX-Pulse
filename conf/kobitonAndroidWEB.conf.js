@@ -1,7 +1,7 @@
 const {config} = require('./kobitonWDIO.conf')
 
 config.specs = [
-  './test/specs/**/google.e2e.js'
+  './test/specs/**/all.e2e.js'
 ]
 
 config.capabilities = [{
@@ -11,7 +11,7 @@ config.capabilities = [{
   captureScreenshots: true,
   browserName:        'chrome',
   deviceGroup:        'KOBITON',
-  deviceName:         'OnePlus6T',
+  deviceName:         'Pixel 3a XL',
   platformName:       'Android'
 }]
 

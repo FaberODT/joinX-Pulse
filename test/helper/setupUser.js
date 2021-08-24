@@ -14,7 +14,9 @@ trainingCertificates = [];
 dbsCertificates = [];
 incorporationCertiKin = [];
 businessCertiKin = []; 
-rightToWorkChecks = [];
+rightToWorkChecks1 = [];
+rightToWorkChecks2 = [];
+rightToWorkChecks3 = [];
 
 class apiService {
     deleteUserData() {
@@ -121,6 +123,20 @@ class apiService {
     }
 
     /**
+     * API will save and continue the References section
+     */
+    saveAndContinueReferencesSection () {
+        joinpulse_fileUpload.patch('')
+        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .send(dataServices.getReferencesInfo())
+        .expect(204)
+        .end((err, res) => {
+            if(err) return err;
+        })
+    }
+
+    /**
      * API will upload the certificate for Training Section
      */
     uploadFileForTrainingSection() {
@@ -185,7 +201,7 @@ class apiService {
      */
     uploadFile1ForRightToWorkChecksSection() {
         console.log("Joinpulse Auth token is: " + joinpulseAccessToken);
-        joinpulse_fileUpload.post('/files/RightToWork')
+        joinpulse_fileUpload.post('/files/RightToWorkUKPassport')
         .set('Authorization', `Bearer ${joinpulseAccessToken}`)
         .attach('file', process.cwd() + "/app/test.png")
         .expect(200)
@@ -194,8 +210,8 @@ class apiService {
             fileUpload_RWC1[1] = res.body.file.fileSizeBytes;
             fileUpload_RWC1[2] = res.body.file.dateCreated;
             fileUpload_RWC1[3] = res.body.stagingId;
-            rightToWorkChecks.push(fileUpload_RWC1);
-            console.log("right to check array is : " + rightToWorkChecks);
+            rightToWorkChecks1.push(fileUpload_RWC1);
+            console.log("righttocheck1 value: " + rightToWorkChecks1);
             if(err) return err;
         });
     }
@@ -204,8 +220,7 @@ class apiService {
      * API will upload Supporting file 2 for Right to Work Checks section
      */
     uploadFile2ForRightToWorkChecksSection() {
-        console.log("rightToWorkChecks while uploaidng 2nd file: " + rightToWorkChecks);
-        joinpulse_fileUpload.post('/files/RightToWork2' + `?stagingId=${rightToWorkChecks[0][3]}`)
+        joinpulse_fileUpload.post('/files/ProofOfAddressBankStatement' + `?stagingId=${rightToWorkChecks1[0][3]}`)
         .set('Authorization', `Bearer ${joinpulseAccessToken}`)
         .attach('file', process.cwd() + "/app/test.png")
         .expect(200)
@@ -214,7 +229,8 @@ class apiService {
             fileUpload_RWC2[1] = res.body.file.fileSizeBytes;
             fileUpload_RWC2[2] = res.body.file.dateCreated;
             fileUpload_RWC2[3] = res.body.stagingId;
-            rightToWorkChecks.push(fileUpload_RWC2);
+            rightToWorkChecks2.push(fileUpload_RWC2);
+            console.log("rightToWorkCheck2 value: " + rightToWorkChecks1);
             if(err) return err;
         });
     }
@@ -223,8 +239,7 @@ class apiService {
      * API will upload Supporting file 3 for Right to Work Checks section
      */
     uploadFile3ForRightToWorkChecksSection() {
-        console.log("rightToWorkChecks while uploaidng 3rd file: " + rightToWorkChecks);
-        joinpulse_fileUpload.post('/files/ProofOfAddress' + `?stagingId=${rightToWorkChecks[1][3]}`)
+        joinpulse_fileUpload.post('/files/ProofOfAddress2UtilityBill' + `?stagingId=${rightToWorkChecks2[0][3]}`)
         .set('Authorization', `Bearer ${joinpulseAccessToken}`)
         .attach('file', process.cwd() + "/app/test.png")
         .expect(200)
@@ -233,7 +248,8 @@ class apiService {
             fileUpload_RWC3[1] = res.body.file.fileSizeBytes;
             fileUpload_RWC3[2] = res.body.file.dateCreated;
             fileUpload_RWC3[3] = res.body.stagingId;
-            rightToWorkChecks.push(fileUpload_RWC3);
+            rightToWorkChecks3.push(fileUpload_RWC3);
+            console.log("rightToWorkChecks3 value: " + rightToWorkChecks3);
             if(err) return err;
         });
     }
@@ -242,28 +258,28 @@ class apiService {
     /**
      * API will upload Supporting file 4 for Right to Work Checks section
      */
-    uploadFile4ForRightToWorkChecksSection() {
-        console.log("rightToWorkChecks while uploaidng 4th file: " + rightToWorkChecks);
-        joinpulse_fileUpload.post('/files/ProofOfAddress2' + `?stagingId=${rightToWorkChecks[2][3]}`)
-        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
-        .attach('file', process.cwd() + "/app/test.png")
-        .expect(200)
-        .end((err, res) => {
-            fileUpload_RWC4[0] = res.body.file.fileName;
-            fileUpload_RWC4[1] = res.body.file.fileSizeBytes;
-            fileUpload_RWC4[2] = res.body.file.dateCreated;
-            fileUpload_RWC4[3] = res.body.stagingId;
-            rightToWorkChecks.push(fileUpload_RWC4);
-            if(err) return err;
-        });
-    }
+    // uploadFile4ForRightToWorkChecksSection() {
+    //     console.log("rightToWorkChecks while uploaidng 4th file: " + rightToWorkChecks);
+    //     joinpulse_fileUpload.post('/files/ProofOfAddress2' + `?stagingId=${rightToWorkChecks[2][3]}`)
+    //     .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+    //     .attach('file', process.cwd() + "/app/test.png")
+    //     .expect(200)
+    //     .end((err, res) => {
+    //         fileUpload_RWC4[0] = res.body.file.fileName;
+    //         fileUpload_RWC4[1] = res.body.file.fileSizeBytes;
+    //         fileUpload_RWC4[2] = res.body.file.dateCreated;
+    //         fileUpload_RWC4[3] = res.body.stagingId;
+    //         rightToWorkChecks.push(fileUpload_RWC4);
+    //         if(err) return err;
+    //     });
+    // }
 
     /**
      * API will save and continue the RWC section
      */
     saveAndContinueRWCSection () {
-        console.log("rightToWorkChecks while saving the section: " + rightToWorkChecks);
-        joinpulse_fileUpload.patch(`?stagingId=${rightToWorkChecks[3][3]}`)
+        console.log("rightToWorkChecks while saving the section: " + rightToWorkChecks3);
+        joinpulse_fileUpload.patch(`?stagingId=${rightToWorkChecks3[0][3]}`)
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${joinpulseAccessToken}`)
         .send(dataServices.getRightToWorkChecksInfo())

@@ -12,23 +12,23 @@ describe('verify the google browser page', () => {
     // });
 
     it('Verify details of Peronal Details section', () => {
-        //following will clear the worker's profile
-        apiScreen.deleteUserData();
-        browser.pause(2000);
-        //following will import worker's profile
-        apiScreen.getFaberAuthToken();
-        browser.pause(2000);
-        apiScreen.getJoinPulseAuthToken();
-        browser.pause(2000);
-        apiScreen.updateUserInformation();
-        browser.pause(2000);
+        // //following will clear the worker's profile
+        // apiScreen.deleteUserData();
+        // browser.pause(2000);
+        // //following will import worker's profile
+        // apiScreen.getFaberAuthToken();
+        // browser.pause(2000);
+        // apiScreen.getJoinPulseAuthToken();
+        // browser.pause(2000);
+        // apiScreen.updateUserInformation();
+        // browser.pause(2000);
         console.log("Worker's profile imported");
 
         // //following will open browser and load the url
         browser.url("https://e2e.joinpulse.co.uk");
 
         // //following will perform login 
-        loginScreen.loginIntoSite("fabertester+iqx_e6_midwives_mobileweb_chrome@gmail.com","Password123");
+        loginScreen.loginIntoSite("fabertester+nimesh001-e2e@gmail.com","Password123");
 
         // //following will assert dashboard screen
         dashboardScreen.assertDashboardLbl();
@@ -48,5 +48,12 @@ describe('verify the google browser page', () => {
 
         //following will assert the Personal Details
         personalDetailScreen.assertPersonalDetails();
+
+        //following will perform logout operation
+        sectionScreen.clickOnMenuBtn();
+        sectionScreen.clickOnLogoutBtn();
+
+        //following will assert login screen
+        loginScreen.assertLoginScreen();
     });
 });

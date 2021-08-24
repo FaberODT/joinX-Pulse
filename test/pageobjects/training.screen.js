@@ -91,7 +91,7 @@ class trainingScreen {
 
     scrollUp () {
         browser.touchAction([
-            { action: 'press', x: 700, y: 2400 },
+            { action: 'press', x: 700, y: 2200 },
             { action: 'moveTo', x: 700, y: 600 },
             'release'
         ]);
@@ -99,7 +99,7 @@ class trainingScreen {
 
     uploadFile1 () {
         browser.touchAction([
-            { action: 'press', x: 700, y: 2400 },
+            { action: 'press', x: 700, y: 2200 },
             { action: 'moveTo', x: 700, y: 600 },
             'release'
         ]);
@@ -136,7 +136,7 @@ class trainingScreen {
 
     uploadFile2 () {
         browser.touchAction([
-            { action: 'press', x: 700, y: 2400 },
+            { action: 'press', x: 700, y: 2200 },
             { action: 'moveTo', x: 700, y: 600 },
             'release'
         ]);
@@ -175,7 +175,7 @@ class trainingScreen {
 
     clickOnCertificateTypeDrd1 () {
         browser.touchAction([
-            { action: 'press', x: 700, y: 2400 },
+            { action: 'press', x: 700, y: 2200 },
             { action: 'moveTo', x: 700, y: 600 },
             'release'
         ]);

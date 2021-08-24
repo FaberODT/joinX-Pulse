@@ -5,8 +5,8 @@ const dashboardScreen = require('../pageobjects/dashBoard.screen');
 const sectionScreen = require('../pageobjects/sections.screen');
 const dbsScreen = require('../pageobjects/dbs.screen');
 
-describe('verify the google browser page', () => {
-    it('to verify the title of google page', () => {
+describe('verify the DBS section', () => {
+    it('to verify the title of the DBS section screen after saving it', () => {
         //following will fetch the acacium Auth Token
         apiScreen.getFaberAuthToken();
         browser.pause(5000);
@@ -17,7 +17,7 @@ describe('verify the google browser page', () => {
 
         //following will upload the certificate for the training section
         apiScreen.uploadCertificateForDBSSection();
-        browser.pause(5000);
+        browser.pause(15000);
 
         //following will save and continue the training section with all mandate details
         apiScreen.saveAndContinueDBSSection();
@@ -45,7 +45,14 @@ describe('verify the google browser page', () => {
         dbsScreen.assertDBSPageHeader();
 
         //following will assert the status of the DBS details section
-        dbsScreen.assertDBSDetailsSectionStatus();            
+        dbsScreen.assertDBSDetailsSectionStatus();
+        
+        //following will perform logout operation
+        sectionScreen.clickOnMenuBtn();
+        sectionScreen.clickOnLogoutBtn();
+
+        //following will assert login screen
+        loginScreen.assertLoginScreen();
     });
 
     // it('Update NMC section & check section status', () => {

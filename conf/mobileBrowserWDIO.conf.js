@@ -2,6 +2,7 @@ const ReportAggregator = require('@rpii/wdio-html-reporter').ReportAggregator;
 const HtmlReporter = require('@rpii/wdio-html-reporter').HtmlReporter;
 
 exports.config = {
+    maxInstances: 1,
     //
     // ====================
     // Runner Configuration
@@ -205,7 +206,11 @@ exports.config = {
 
         global.businessCertiKin;
 
-        global.rightToWorkChecks;
+        global.rightToWorkChecks1;
+
+        global.rightToWorkChecks2;
+
+        global.rightToWorkChecks3;
     },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service

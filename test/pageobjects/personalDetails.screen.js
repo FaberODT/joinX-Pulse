@@ -27,7 +27,6 @@ class personalDetailScreen {
     get postCodeTxtBox () { return $('//input[@id="Address-0-PostCode"]')}
 
 
-
     assertPersonaDetailsPageLbl () {
         this.pageHeaderLbl.waitForExist({timeout: 60000});
         expect(this.pageHeaderLbl.getText()).to.equal("1. Personal details");
@@ -41,11 +40,12 @@ class personalDetailScreen {
 
     assertPersonalDetails () {
         this.firstNameTxtBox.waitForExist({timeout: 60000});
-        expect(this.firstNameTxtBox.getValue()).to.equal("fabertester+iqx_e6_midwives_mobileweb_chrome@gmail.com");
+        // expect(this.firstNameTxtBox.getValue()).to.equal("fabertester+iqx_e6_midwives_mobileweb_chrome@gmail.com");
+        expect(this.firstNameTxtBox.getValue()).to.equal("fabertester+nimesh001-e2e@gmail.com");
 
         expect(this.lastNameTxtBox.getValue()).to.equal("Tester");
 
-        expect(this.maleRadioBtn.isSelected()).to.equal(true);
+        // expect(this.maleRadioBtn.isSelected()).to.equal(true);
 
         expect(this.dobTxtBox.getValue()).to.equal("01/01/1970");
 

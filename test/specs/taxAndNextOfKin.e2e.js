@@ -6,7 +6,7 @@ const sectionScreen = require('../pageobjects/sections.screen');
 const taxAndNextOfKinScreen = require('../pageobjects/taxAndNextOfKin.screen');
 
 
-describe('verify the google browser page', () => {
+describe('verify the tax and next of kin section', () => {
     it('Verify Tax and next kin section with LIMITED COMPANY payment option - using API', () => {
         //following will fetch the acacium Auth Token
         apiScreen.getFaberAuthToken();
@@ -18,11 +18,11 @@ describe('verify the google browser page', () => {
 
         //following will upload certificate for the Incorporation
         apiScreen.uploadCertificateForIncorporationNextOfKin();
-        browser.pause(5000);
+        browser.pause(15000);
 
         //following will upload certificate for the Business bank account
         apiScreen.uploadCertificateForBusinessNextOfKin();
-        browser.pause(5000);
+        browser.pause(15000);
 
         //following will save and continue the Next of the Kin section
         apiScreen.saveAndContinueNextOfKinSection();
@@ -48,125 +48,143 @@ describe('verify the google browser page', () => {
         
         //following will assert the status of the section
         taxAndNextOfKinScreen.assertSectionStatus();
+
+        //following will perform logout operation
+        sectionScreen.clickOnMenuBtn();
+        sectionScreen.clickOnLogoutBtn();
+
+        //following will assert login screen
+        loginScreen.assertLoginScreen();
     });
 
-    // it('Verify Tax and next kin section with PAYE payment option', () => {
-    //     //following will open browser and load the url
-    //     browser.url("https://e2e.joinpulse.co.uk");
+    it('Verify Tax and next kin section with PAYE payment option', () => {
+        //following will open browser and load the url
+        browser.url("https://e2e.joinpulse.co.uk");
 
-    //     //following will perform login 
-    //     loginScreen.loginIntoSite("fabertester+iqx_e6_midwives_mobileweb_chrome@gmail.com","Password123");
+        //following will perform login 
+        loginScreen.loginIntoSite("fabertester+nimesh001-e2e@gmail.com","Password123");
 
-    //     // //following will assert dashboard screen
-    //     dashboardScreen.assertDashboardLbl();
+        // //following will assert dashboard screen
+        dashboardScreen.assertDashboardLbl();
 
-    //     sectionScreen.clickOnMenuBtn();
-    //     sectionScreen.clickOnProfileMenuOption();
+        sectionScreen.clickOnMenuBtn();
+        sectionScreen.clickOnProfileMenuOption();
 
-    //     //following will click on Tax and next of kin section
-    //     sectionScreen.clickOnTaxAndNextOfKinSection();
+        //following will click on Tax and next of kin section
+        sectionScreen.clickOnTaxAndNextOfKinSection();
 
-    //     //following will assert that user is on Tax and next of kin screen
-    //     taxAndNextOfKinScreen.assertTaxAndNextOfKinPageHeader();
+        //following will assert that user is on Tax and next of kin screen
+        taxAndNextOfKinScreen.assertTaxAndNextOfKinPageHeader();
 
-    //     //following will click on "PAYE" radio button
-    //     taxAndNextOfKinScreen.clickOnPayeRadioBtn();
+        //following will click on "PAYE" radio button
+        taxAndNextOfKinScreen.clickOnPayeRadioBtn();
 
-    //     //following will enter First Name
-    //     taxAndNextOfKinScreen.enterFirstName("Nimesh");
+        //following will enter First Name
+        taxAndNextOfKinScreen.enterFirstName("Nimesh");
 
-    //     //following will enter Last Name
-    //     taxAndNextOfKinScreen.enterLastName("Bhatt");
+        //following will enter Last Name
+        taxAndNextOfKinScreen.enterLastName("Bhatt");
 
-    //     //following will enter Phone number
-    //     taxAndNextOfKinScreen.enterPhone("07912345678");
+        //following will enter Phone number
+        taxAndNextOfKinScreen.enterPhone("07912345678");
 
-    //     //following will enter relation ship
-    //     taxAndNextOfKinScreen.enterRelationShip("Friend");
+        //following will enter relation ship
+        taxAndNextOfKinScreen.enterRelationShip("Friend");
 
-    //     //following will click on Save and Continue button
-    //     taxAndNextOfKinScreen.clickOnSaveAndContinueBtn();
-    //     browser.pause(8000);
+        //following will click on Save and Continue button
+        taxAndNextOfKinScreen.clickOnSaveAndContinueBtn();
+        browser.pause(8000);
 
-    //     sectionScreen.clickOnMenuBtn();
-    //     sectionScreen.clickOnProfileMenuOption();
+        sectionScreen.clickOnMenuBtn();
+        sectionScreen.clickOnProfileMenuOption();
 
-    //     //following will click on Tax and next of kin section
-    //     sectionScreen.clickOnTaxAndNextOfKinSection();
-    //     browser.pause(8000);
+        //following will click on Tax and next of kin section
+        sectionScreen.clickOnTaxAndNextOfKinSection();
+        browser.pause(8000);
 
-    //     //following will assert that user is on Tax and next of kin screen
-    //     taxAndNextOfKinScreen.assertTaxAndNextOfKinPageHeader();
+        //following will assert that user is on Tax and next of kin screen
+        taxAndNextOfKinScreen.assertTaxAndNextOfKinPageHeader();
         
-    //     //following will assert the status of the section
-    //     taxAndNextOfKinScreen.assertSectionStatus();
+        //following will assert the status of the section
+        taxAndNextOfKinScreen.assertSectionStatus();
 
-    //     //following will assert the section values
-    //     taxAndNextOfKinScreen.fetchPAYEValues();
-    // });
+        //following will assert the section values
+        taxAndNextOfKinScreen.fetchPAYEValues();
 
-    // it('Verify Tax and next kin section with UMBRELLA payment option', () => {
-    //      //following will open browser and load the url
-    //      browser.url("https://e2e.joinpulse.co.uk");
+        //following will perform logout operation
+        sectionScreen.clickOnMenuBtn();
+        sectionScreen.clickOnLogoutBtn();
 
-    //      //following will perform login 
-    //      loginScreen.loginIntoSite("fabertester+iqx_e6_midwives_mobileweb_chrome@gmail.com","Password123");
- 
-    //      // //following will assert dashboard screen
-    //      dashboardScreen.assertDashboardLbl();
- 
-    //      sectionScreen.clickOnMenuBtn();
-    //      sectionScreen.clickOnProfileMenuOption();
- 
-    //      //following will click on Tax and next of kin section
-    //      sectionScreen.clickOnTaxAndNextOfKinSection();
- 
-    //      //following will assert that user is on Tax and next of kin screen
-    //      taxAndNextOfKinScreen.assertTaxAndNextOfKinPageHeader();
- 
-    //      //following will click on "UMBRELLA" radio button
-    //      taxAndNextOfKinScreen.clickOnUmbrellaRadioBtn();
+        //following will assert login screen
+        loginScreen.assertLoginScreen();
+    });
 
-    //      //following will enter Umbrella Company name 
-    //      taxAndNextOfKinScreen.enterUmbrellaCompanyName("Umbrella!");
- 
-    //      //following will enter First Name
-    //      taxAndNextOfKinScreen.enterFirstName("Nimesh");
- 
-    //      //following will enter Last Name
-    //      taxAndNextOfKinScreen.enterLastName("Bhatt");
- 
-    //      //following will enter Phone number
-    //      taxAndNextOfKinScreen.enterPhone("07912345678");
- 
-    //      //following will enter relation ship
-    //      taxAndNextOfKinScreen.enterRelationShip("Friend");
- 
-    //      //following will click on Save and Continue button
-    //      taxAndNextOfKinScreen.clickOnSaveAndContinueBtn();
-    //      browser.pause(8000);
- 
-    //      sectionScreen.clickOnMenuBtn();
-    //      sectionScreen.clickOnProfileMenuOption();
- 
-    //      //following will click on Tax and next of kin section
-    //      sectionScreen.clickOnTaxAndNextOfKinSection();
-    //      browser.pause(8000);
- 
-    //      //following will assert that user is on Tax and next of kin screen
-    //      taxAndNextOfKinScreen.assertTaxAndNextOfKinPageHeader();
-         
-    //      //following will assert the status of the section
-    //      taxAndNextOfKinScreen.assertSectionStatus();
- 
-    //      //following will fetch Umbrella company name
-    //      taxAndNextOfKinScreen.fetchUmbrellaCompanyName();
+    it('Verify Tax and next kin section with UMBRELLA payment option', () => {
+        //following will open browser and load the url
+        browser.url("https://e2e.joinpulse.co.uk");
+        //following will perform login 
+        loginScreen.loginIntoSite("fabertester+nimesh001-e2e@gmail.com","Password123");
 
-    //      //following will assert the section values
-    //      taxAndNextOfKinScreen.fetchPAYEValues();
-    // });
+        // //following will assert dashboard screen
+        dashboardScreen.assertDashboardLbl();
 
-    // it('Verify Tax and next kin section with LIMITED COMPANY payment option', () => {
+        sectionScreen.clickOnMenuBtn();
+        sectionScreen.clickOnProfileMenuOption();
+
+        //following will click on Tax and next of kin section
+        sectionScreen.clickOnTaxAndNextOfKinSection();
+
+        //following will assert that user is on Tax and next of kin screen
+        taxAndNextOfKinScreen.assertTaxAndNextOfKinPageHeader();
+
+        //following will click on "UMBRELLA" radio button
+        taxAndNextOfKinScreen.clickOnUmbrellaRadioBtn();
+        //following will enter Umbrella Company name 
+        taxAndNextOfKinScreen.enterUmbrellaCompanyName("Umbrella!");
+
+        //following will enter First Name
+        taxAndNextOfKinScreen.enterFirstName("Nimesh");
+
+        //following will enter Last Name
+        taxAndNextOfKinScreen.enterLastName("Bhatt");
+
+        //following will enter Phone number
+        taxAndNextOfKinScreen.enterPhone("07912345678");
+
+        //following will enter relation ship
+        taxAndNextOfKinScreen.enterRelationShip("Friend");
+
+        //following will click on Save and Continue button
+        taxAndNextOfKinScreen.clickOnSaveAndContinueBtn();
+        browser.pause(8000);
+
+        sectionScreen.clickOnMenuBtn();
+        sectionScreen.clickOnProfileMenuOption();
+
+        //following will click on Tax and next of kin section
+        sectionScreen.clickOnTaxAndNextOfKinSection();
+        browser.pause(8000);
+
+        //following will assert that user is on Tax and next of kin screen
+        taxAndNextOfKinScreen.assertTaxAndNextOfKinPageHeader();
+        
+        //following will assert the status of the section
+        taxAndNextOfKinScreen.assertSectionStatus();
+
+        //following will fetch Umbrella company name
+        taxAndNextOfKinScreen.fetchUmbrellaCompanyName();
+        //following will assert the section values
+        taxAndNextOfKinScreen.fetchPAYEValues();
+
+         //following will perform logout operation
+        sectionScreen.clickOnMenuBtn();
+        sectionScreen.clickOnLogoutBtn();
+
+        //following will assert login screen
+        loginScreen.assertLoginScreen();
+    });
+
+    // it('Verify Tax and next kin section with LIMITED COMPANY payment option - traditional method', () => {
     //     //following will open browser and load the url
     //     browser.url("https://e2e.joinpulse.co.uk");
 

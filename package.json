@@ -6,7 +6,8 @@
   "scripts": {
     "androidBrowser": "npx wdio conf/wdio.conf.js android",
     "test": "npx wdio conf/androidBrowser.conf.js",
-    "kobitonAndroidBrowser": "npx wdio conf/kobitonAndroidWEB.conf.js",
+    "testAPI": "npx wdio conf/androidBrowser.conf.js --suite withAPI",
+    "kobitonAndroidBrowser": "npx wdio conf/kobitonAndroidWEB.conf.js android",
     "sendMail": "node test/helper/sendMail.js",
     "generateReport": "node test/helper/generateReport.js",
     "pretest": "mocha test/helper/setupUser.js --timeout 5000 --recursive"

@@ -32,6 +32,7 @@ class sectionScreen {
     clickOnMenuBtn () {
         this.menuBtn.waitForExist({timeout: 60000});
         this.menuBtn.click();
+        browser.pause(1000);
     }
 
     clickOnLogoutBtn () { 
@@ -77,6 +78,12 @@ class sectionScreen {
     }
 
     clickOnTaxAndNextOfKinSection () { 
+        browser.touchAction([
+            { action: 'press', x: 1000, y: 2000 },
+            { action: 'moveTo', x: 1000, y: 1000 },
+            'release'
+        ]);
+        browser.pause(1000);
         this.taxAndNextOfKinSection.waitForExist({timeout: 60000});
         this.taxAndNextOfKinSection.click();
     }

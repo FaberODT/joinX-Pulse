@@ -13,12 +13,28 @@ config.capabilities = [
         platformVersion: '10.0',
         autoGrantPermissions: true,
         noReset: false,
-        chromedriverExecutable: 'C:/Users/Bhattn/Documents/Projects/Development/ICS_Stuff/Automation/JoinX/joinX-Kings/chromedrivers/chromedriver.exe'
+        chromedriverExecutable: process.cwd() + '/chromedrivers/chromedriver.exe'
     }
 ];
 
 config.specs = [
-    './test/specs/**/training.e2e.js'
+    './test/specs/**/all.e2e.js'
 ];
+
+// config.suites = {
+//     nonAPI: [
+//         './test/specs/**/generalNurseDetails.e2e.js',
+//         './test/specs/**/gradeAndEmployer.e2e.js',
+//         './test/specs/**/nmcCheck.e2e.js',
+//         './test/specs/**/personalDetails.e2e.js',
+//         './test/specs/**/reference.e2e.js'
+//     ],
+//     withAPI: [
+//         './test/specs/**/dbsDetails.e2e.js',
+//         './test/specs/**/rightToWorkChecks.e2e.js',
+//         './test/specs/**/taxAndNextOfKin.e2e.js',
+//         './test/specs/**/training.e2e.js'
+//     ]
+// };
 
 exports.config = config;
