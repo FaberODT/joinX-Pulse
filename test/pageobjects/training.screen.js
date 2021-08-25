@@ -174,11 +174,12 @@ class trainingScreen {
     }
 
     clickOnCertificateTypeDrd1 () {
-        browser.touchAction([
-            { action: 'press', x: 700, y: 2200 },
-            { action: 'moveTo', x: 700, y: 600 },
-            'release'
-        ]);
+        // browser.touchAction([
+        //     { action: 'press', x: 700, y: 2200 },
+        //     { action: 'moveTo', x: 700, y: 600 },
+        //     'release'
+        // ]);
+        this.certificateType1.scrollIntoView();
         browser.pause(1000);
         this.certificateType1.waitForExist({timeout: 60000});
         this.certificateType1.click();

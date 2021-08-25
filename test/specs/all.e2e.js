@@ -537,26 +537,26 @@ describe('Join Pulse E2E Environment: ', () => {
     it('add certificate to training section - using API', () => {
         //following will fetch the acacium Auth Token
         apiScreen.getFaberAuthToken();
-        browser.pause(10000);
+        browser.pause(5000);
 
         //following will fetch the JoinPulse Auth token
         apiScreen.getJoinPulseAuthToken();
-        browser.pause(10000);
+        browser.pause(5000);
 
         //following will upload the certificate for the training section
         apiScreen.uploadFileForTrainingSection();
-        browser.pause(15000);
+        browser.pause(10000);
+
+        //following will open browser and load the url
+        browser.url("https://e2e.joinpulse.co.uk");
 
         //following will upload the certificate for the training section
         apiScreen.uploadFileForTrainingSection1();
-        browser.pause(15000);
+        browser.pause(10000);
 
         //following will save and continue the training section with all mandate details
         apiScreen.saveAndContinueTrainingSection();
         browser.pause(10000);
-        
-        //following will open browser and load the url
-        browser.url("https://e2e.joinpulse.co.uk");
 
         //following will perform login 
         loginScreen.loginIntoSite("fabertester+nimesh001-e2e@gmail.com","Password123");
@@ -585,56 +585,56 @@ describe('Join Pulse E2E Environment: ', () => {
         // loginScreen.assertLoginScreen();
     });
 
-    it('verify training section after removing certificate', () => {
-        //following will open browser and load the url
-        browser.url("https://e2e.joinpulse.co.uk");
+    // it('verify training section after removing certificate', () => {
+    //     //following will open browser and load the url
+    //     browser.url("https://e2e.joinpulse.co.uk");
 
-        //following will perform login 
-        loginScreen.loginIntoSite("fabertester+nimesh001-e2e@gmail.com","Password123");
+    //     //following will perform login 
+    //     loginScreen.loginIntoSite("fabertester+nimesh001-e2e@gmail.com","Password123");
 
-        // //following will assert dashboard screen
-        dashboardScreen.assertDashboardLbl();
+    //     // //following will assert dashboard screen
+    //     dashboardScreen.assertDashboardLbl();
 
-        //following will click on Menu button (Hamburger menu)
-        sectionScreen.clickOnMenuBtn();
-        sectionScreen.clickOnProfileMenuOption();
-        sectionScreen.clickOnTrainingSection();
+    //     //following will click on Menu button (Hamburger menu)
+    //     sectionScreen.clickOnMenuBtn();
+    //     sectionScreen.clickOnProfileMenuOption();
+    //     sectionScreen.clickOnTrainingSection();
         
-        //following will assert training screen
-        trainingScreen.assertTrainingPageHeader();
+    //     //following will assert training screen
+    //     trainingScreen.assertTrainingPageHeader();
 
-        // //following will click on Delete button of the first Certificate
-        // trainingScreen.clickFirstCertiDeleteIcon();
+    //     // //following will click on Delete button of the first Certificate
+    //     // trainingScreen.clickFirstCertiDeleteIcon();
 
-        // //following will click on delete button from certificate delete confirmation pop-up
-        // trainingScreen.clickCertiDeleteConfirmation();
+    //     // //following will click on delete button from certificate delete confirmation pop-up
+    //     // trainingScreen.clickCertiDeleteConfirmation();
 
-        //following will deselect the Counter Fraud check box in order to remove the uploaded certificate
-        trainingScreen.clickOnCertificateCheckBoxes();
+    //     //following will deselect the Counter Fraud check box in order to remove the uploaded certificate
+    //     trainingScreen.clickOnCertificateCheckBoxes();
 
-        //following will click on Save and Continue button
-        trainingScreen.clickOnSaveAndContinueBtn();
+    //     //following will click on Save and Continue button
+    //     trainingScreen.clickOnSaveAndContinueBtn();
 
-        //following will click on Menu button (Hamburger menu)
-        sectionScreen.clickOnMenuBtn();
-        sectionScreen.clickOnProfileMenuOption();
-        sectionScreen.clickOnTrainingSection();
+    //     //following will click on Menu button (Hamburger menu)
+    //     sectionScreen.clickOnMenuBtn();
+    //     sectionScreen.clickOnProfileMenuOption();
+    //     sectionScreen.clickOnTrainingSection();
         
-        //following will assert training screen
-        trainingScreen.assertTrainingPageHeader();
+    //     //following will assert training screen
+    //     trainingScreen.assertTrainingPageHeader();
 
-        //following will assert the section status
-        trainingScreen.assertTrainingSectionStatus();
+    //     //following will assert the section status
+    //     trainingScreen.assertTrainingSectionStatus();
 
-        // //following will click on Menu button (Hamburger menu)
-        // sectionScreen.clickOnMenuBtn();
+    //     // //following will click on Menu button (Hamburger menu)
+    //     // sectionScreen.clickOnMenuBtn();
         
-        // //following will click on Logout button
-        // sectionScreen.clickOnLogoutBtn();
+    //     // //following will click on Logout button
+    //     // sectionScreen.clickOnLogoutBtn();
 
-        // //following will assert login screen
-        // loginScreen.assertLoginScreen();
-    });
+    //     // //following will assert login screen
+    //     // loginScreen.assertLoginScreen();
+    // });
 
     it('Verify details of Peronal Details section', () => {
         // //following will clear the worker's profile

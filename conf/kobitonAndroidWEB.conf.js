@@ -12,7 +12,8 @@ config.capabilities = [{
   browserName:        'chrome',
   deviceGroup:        'KOBITON',
   deviceName:         'Pixel 3a XL',
-  platformName:       'Android'
+  platformName:       'Android',
+  platformVersion:    '10'
 }]
 
 exports.config = config

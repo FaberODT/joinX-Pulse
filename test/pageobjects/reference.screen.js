@@ -59,11 +59,15 @@ class referenceScreen {
     }
 
     enterValueForEmail1 () {
+        this.refEmail1.scrollIntoView();
+        browser.pause(1000);
         this.refEmail1.waitForExist({timeout: 60000});
         this.refEmail1.setValue("rio@test.com");
     }
     
     enterValueForEmail2 () {
+        this.refEmail2.scrollIntoView();
+        browser.pause(1000);
         this.refEmail2.waitForExist({timeout: 60000});
         this.refEmail2.setValue("denver@test.com");
     }
@@ -89,11 +93,15 @@ class referenceScreen {
     }
 
     enterValueForDateFrom1 () {
+        this.refFrom1.scrollIntoView();
+        browser.pause(1000);
         this.refFrom1.waitForExist({timeout: 60000});
         this.refFrom1.setValue("01011991");
     }
     
     enterValueForDateFrom2 () {
+        this.refFrom2.scrollIntoView();
+        browser.pause(1000);
         this.refFrom2.waitForExist({timeout: 60000});
         this.refFrom2.setValue("01011993");
     }
@@ -112,23 +120,22 @@ class referenceScreen {
         this.enterValueForRefName1();
         browser.hideKeyboard();
         browser.pause(1000);``
-        browser.touchAction([
-            { action: 'press', x: 700, y: 2200 },
-            { action: 'moveTo', x: 700, y: 600 },
-            'release'
-        ]);
-        browser.pause(1000);
+        // browser.touchAction([
+        //     { action: 'press', x: 700, y: 2200 },
+        //     { action: 'moveTo', x: 700, y: 600 },
+        //     'release'
+        // ]);
         this.enterValueForEmail1();
         this.enterValueForJobTitle1();
         this.enterValueForEmployer1();
         browser.hideKeyboard();
         browser.pause(1000);
-        browser.touchAction([
-            { action: 'press', x: 700, y: 2200 },
-            { action: 'moveTo', x: 700, y: 600 },
-            'release'
-        ]);
-        browser.pause(1000);
+        // browser.touchAction([
+        //     { action: 'press', x: 700, y: 2200 },
+        //     { action: 'moveTo', x: 700, y: 600 },
+        //     'release'
+        // ]);
+        // browser.pause(1000);
         this.enterValueForDateFrom1();
         this.enterValueForDateTo1();
     }
@@ -137,23 +144,23 @@ class referenceScreen {
         this.enterValueForRefName2();
         browser.hideKeyboard();
         browser.pause(1000);
-        browser.touchAction([
-            { action: 'press', x: 700, y: 2200 },
-            { action: 'moveTo', x: 700, y: 600 },
-            'release'
-        ]);
-        browser.pause(1000);
+        // browser.touchAction([
+        //     { action: 'press', x: 700, y: 2200 },
+        //     { action: 'moveTo', x: 700, y: 600 },
+        //     'release'
+        // ]);
+        // browser.pause(1000);
         this.enterValueForEmail2();
         this.enterValueForJobTitle2();
         this.enterValueForEmployer2();
         browser.hideKeyboard();
         browser.pause(1000);
-        browser.touchAction([
-            { action: 'press', x: 700, y: 2200 },
-            { action: 'moveTo', x: 700, y: 600 },
-            'release'
-        ]);
-        browser.pause(1000);
+        // browser.touchAction([
+        //     { action: 'press', x: 700, y: 2200 },
+        //     { action: 'moveTo', x: 700, y: 600 },
+        //     'release'
+        // ]);
+        // browser.pause(1000);
         this.enterValueForDateFrom2();
         this.enterValueForDateTo2();
     }

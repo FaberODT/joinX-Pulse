@@ -24,11 +24,12 @@ class dbsScreen {
         this.pageHeaderLbl.waitForExist({timeout: 60000});
         browser.pause(3000);
         expect(this.pageHeaderLbl.getText()).to.equal("5. DBS details");
-        browser.touchAction([
-            { action: 'press', x: 700, y: 2200 },
-            { action: 'moveTo', x: 700, y: 600 },
-            'release'
-        ]);
+        // browser.touchAction([
+        //     { action: 'press', x: 700, y: 2200 },
+        //     { action: 'moveTo', x: 700, y: 600 },
+        //     'release'
+        // ]);
+        this.certificateTxtBox.scrollIntoView();
     }
 
     clickOnYesRadioBtn () {
