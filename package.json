@@ -8,6 +8,7 @@
     "test": "npx wdio conf/androidBrowser.conf.js",
     "testAPI": "npx wdio conf/androidBrowser.conf.js --suite withAPI",
     "kobitonAndroidBrowser": "npx wdio conf/kobitonAndroidWEB.conf.js android",
+    "kobitoniOSBrowser": "npx wdio conf/kobitoniOSWEB.conf.js",
     "sendMail": "node test/helper/sendMail.js",
     "generateReport": "node test/helper/generateReport.js",
     "pretest": "mocha test/helper/setupUser.js --timeout 5000 --recursive"
