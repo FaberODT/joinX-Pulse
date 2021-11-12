@@ -1,7 +1,7 @@
 const {config} = require('./kobitonWDIO.conf')
 
 config.specs = [
-  './test/specs/**/all.e2e.js'
+  './test/specs/**/autoSave.e2e.js'
 ]
 
 config.capabilities = [{
@@ -13,7 +13,7 @@ config.capabilities = [{
   deviceGroup:        'KOBITON',
   deviceName:         'Pixel 3a XL',
   platformName:       'Android',
-  platformVersion:    '10'
+  platformVersion:    '11'
 }]
 
 exports.config = config

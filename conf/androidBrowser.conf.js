@@ -18,7 +18,7 @@ config.capabilities = [
 ];
 
 config.specs = [
-    './test/specs/**/all.e2e.js'
+    './test/specs/**/autoSave.e2e.js'
 ];
 
 // config.suites = {
