@@ -8,6 +8,12 @@ class dbsScreen {
 
     get yesRadioBtn () { return $('//section[@id="DBSUpdateRegistered"]/label[1]/span')}
 
+    get noRadioBtn () { return $('//section[@id="DBSUpdateRegistered"]/label[2]/span')}
+
+    get yesRadioBtn_value () { return $('//input[@id="DBSUpdateRegistered-DBSUpdateYes"]')}
+
+    get noRadioBtn_value () { return $('//input[@id="DBSUpdateRegistered-DBSUpdateNo"]')}
+
     get certificateTxtBox () { return $('//input[@id="DBSUpdateCertificateNumber"]')}
 
     get addFileBtn () { return $('//button[@id="add-file-DBSUpdateCertificate"]')}
@@ -20,6 +26,8 @@ class dbsScreen {
     get fileEle () { return $('//*[contains(@text,"Files")]')}
     get eleDoc () { return $('//*[contains(@text,"file.pdf")]')}
 
+    DBS_flag = false;
+
     assertDBSPageHeader () {
         this.pageHeaderLbl.waitForExist({timeout: 60000});
         browser.pause(3000);
@@ -29,7 +37,31 @@ class dbsScreen {
         //     { action: 'moveTo', x: 700, y: 600 },
         //     'release'
         // ]);
-        this.certificateTxtBox.scrollIntoView();
+        // this.certificateTxtBox.scrollIntoView();
+    }
+
+    switchDBSValue() {
+        this.noRadioBtn_value.waitForExist({timeout: 60000});
+        if(this.noRadioBtn_value.isSelected()){
+            this.yesRadioBtn_value.scrollIntoView();
+            browser.pause(10000);
+            this.yesRadioBtn.click();
+            this.DBS_flag = true;
+        }
+        else{
+            this.noRadioBtn_value.scrollIntoView();
+            browser.pause(10000);
+            this.noRadioBtn.click();
+        }
+    }
+
+    assertDBSValue() {
+        if(this.DBS_flag == true){
+            expect(this.yesRadioBtn_value.isSelected()).to.equal(true);
+        }
+        else{
+            expect(this.noRadioBtn_value.isSelected()).to.equal(true);
+        }
     }
 
     clickOnYesRadioBtn () {

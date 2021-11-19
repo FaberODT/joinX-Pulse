@@ -5,6 +5,8 @@ const loginScreen = require('../pageobjects/login.screen');
 const dashboardScreen = require('../pageobjects/dashBoard.screen');
 const sectionScreen = require('../pageobjects/sections.screen');
 const personalDetailScreen = require('../pageobjects/personalDetails.screen');
+const dbsScreen = require('../pageobjects/dbs.screen');
+const trainingScreen = require('../pageobjects/training.screen');
 
 describe('verify the google browser page', () => {
     beforeEach('Login functions only', () => {
@@ -180,5 +182,61 @@ describe('verify the google browser page', () => {
 
         //following will assert the Address line 1 value
         personalDetailScreen.assertAddressLine1Value();
+    });
+
+    it('Verify auto save after updating DBS value', () => {
+        //following will click on Declaration and DBS section
+        sectionScreen.clickOnDBSDetailsSection();
+
+        //following will assert the Declaration and DBS section header
+        dbsScreen.assertDBSPageHeader();
+
+        //following will switch the DBS certificate value
+        dbsScreen.switchDBSValue();
+
+        //following will assert the notification message on screen
+        personalDetailScreen.assertChangesSavedNotification();
+
+        //following will click on "Grade and Employer" section
+        sectionScreen.clickOnMenuBtn();
+        //following will click on Grade and Employer Section
+        sectionScreen.clickOnGradeAndEmployerSection();
+        browser.pause(3000);
+
+        //following will again go back to Declaration and DBS section to verify updated value
+        sectionScreen.clickOnMenuBtn();
+        //following will click on Declaration and DBS section
+        sectionScreen.clickOnDBSDetailsSection();
+
+        //following will assert the DBS value
+        dbsScreen.assertDBSValue();
+    });
+
+    it('Verify auto save after updating training value', () => {
+        //following will click on Training section
+        sectionScreen.clickOnTrainingSection();
+
+        //following will assert the Training page header
+        trainingScreen.assertTrainingPageHeader();
+
+        //following will switch None Of the Above check box 
+        trainingScreen.switchNoneOfTheAboveValue();
+
+        //following will assert the notification message on screen
+        personalDetailScreen.assertChangesSavedNotification();
+
+        //following will click on "Grade and Employer" section
+        sectionScreen.clickOnMenuBtn();
+        //following will click on Grade and Employer Section
+        sectionScreen.clickOnGradeAndEmployerSection();
+        browser.pause(3000);
+
+        //following will again go back to Personal Detail section to verify updated value
+        sectionScreen.clickOnMenuBtn();
+        //following will click on Training section
+        sectionScreen.clickOnTrainingSection();
+
+        //following will assert the None of the above check box value
+        trainingScreen.assertTheNoneOfTheAboveCheckBoxValue();
     });
 });

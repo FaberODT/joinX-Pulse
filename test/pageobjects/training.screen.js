@@ -45,12 +45,42 @@ class trainingScreen {
     get allowOpt () {return $('/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.Button[1]')}
     get fileEle () { return $('//*[contains(@text,"Files")]')}
     get eleDoc () { return $('//*[contains(@text,"file.pdf")]')}
+    
+    
+    get noneOfTheAboveChkBox () { return $('//input[@id="CoreTrainingCertificates-NoneOfTheAbove-27"]')}
 
+    get noneOfTheAboveChkBox_value () { return $('//label[@for="CoreTrainingCertificates-NoneOfTheAbove-27"]/span')}
+    
+    noneOfTheAbove_flag = false;
 
     assertTrainingPageHeader () {
         this.pageHeaderLbl.waitForExist({timeout: 60000});
         browser.pause(3000);
         expect(this.pageHeaderLbl.getText()).to.equal("10. Training");
+    }
+
+    switchNoneOfTheAboveValue () {
+        this.noneOfTheAboveChkBox.waitForExist({timeout: 60000});
+        if(this.noneOfTheAboveChkBox.isSelected()){
+            this.noneOfTheAboveChkBox.scrollIntoView();
+            browser.pause(1000);
+            this.noneOfTheAboveChkBox_value.click();
+            this.noneOfTheAbove_flag = true;
+        }
+        else{
+            this.noneOfTheAboveChkBox.scrollIntoView();
+            browser.pause(1000);
+            this.noneOfTheAboveChkBox_value.click();
+        }
+    }
+
+    assertTheNoneOfTheAboveCheckBoxValue () {
+        if(this.noneOfTheAbove_flag == true){
+            expect(this.noneOfTheAboveChkBox.isSelected()).to.equal(false);
+        }
+        else{
+            expect(this.noneOfTheAboveChkBox.isSelected()).to.equal(true);
+        }
     }
 
     clickOnCertificateCheckBoxes () {
