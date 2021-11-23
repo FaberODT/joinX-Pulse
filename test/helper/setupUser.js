@@ -7,11 +7,12 @@ var expect = require('chai').expect,
   joinpulse_auth = supertest("https://e2e-joinpulse-api.joinpulse.co.uk/auth-server/v0/faber-token/from-auth0"),
   import_user = supertest("https://e2e-joinpulse-api.joinpulse.co.uk/profile-management-core/v0/import-profile/8bad8940-6ee2-425d-9f42-e4312cc1c219"),
   joinpulse_fileUpload = supertest("https://e2e-joinpulse-api.joinpulse.co.uk/profile-management-core/v1/my-profile"),
-  fabAccessToken = "", joinpulseAccessToken = "", fileUpload_responce = [], fileUpload_responce1 = [], fileUpload_responce_DBS = [], fileUpload_incorporation_kin = [], fileUpload_business_kin = [],
+  fabAccessToken = "", joinpulseAccessToken = "", fileUpload_responce = [], fileUpload_responce1 = [], fileUpload_responce_DBS = [], fileUpload_additional_document = [], fileUpload_incorporation_kin = [], fileUpload_business_kin = [],
   fileUpload_RWC1 = [], fileUpload_RWC2 = [], fileUpload_RWC3 = [], fileUpload_RWC4 = [];
   
 trainingCertificates = [];
 dbsCertificates = [];
+additionalDocument = [];
 incorporationCertiKin = [];
 businessCertiKin = []; 
 rightToWorkChecks1 = [];
@@ -283,6 +284,42 @@ class apiService {
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${joinpulseAccessToken}`)
         .send(dataServices.getRightToWorkChecksInfo())
+        .expect(204)
+        .end((err, res) => {
+            if(err) return err;
+        });
+    }
+
+    /**
+     * API will upload the certificate for Additional Document section
+     */
+    uploadCertificateForAdditionalDocument() {
+        console.log("Joinpulse bearer token value: " + joinpulseAccessToken);
+        joinpulse_fileUpload.post('/files/Photo')
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .attach('file', process.cwd() + "/app/test.png")
+        .expect(200)
+        .end((err, res) => {
+            fileUpload_additional_document[0] = res.body.file.fileName;
+            fileUpload_additional_document[1] = res.body.file.fileSizeBytes;
+            fileUpload_additional_document[2] = res.body.file.dateCreated;
+            fileUpload_additional_document[3] = res.body.stagingId;
+            additionalDocument.push(fileUpload_additional_document);
+            console.log("Photo badge ID is: " + fileUpload_additional_document);
+            console.log("Photo badge ID is: " + additionalDocument);
+            if(err) return err;
+        });
+    }
+
+    /**
+     * API will save and continue Additional Document section
+     */
+    saveAndContinueAdditionalDocumentSection () {
+        console.log("Additional Document is: " + additionalDocument);
+        joinpulse_fileUpload.patch(`?stagingId=${additionalDocument[0][3]}`)
+        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${joinpulseAccessToken}`)
+        .send(dataServices.getAdditionalDocumentInfo())
         .expect(204)
         .end((err, res) => {
             if(err) return err;

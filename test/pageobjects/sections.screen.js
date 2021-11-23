@@ -25,6 +25,8 @@ class sectionScreen {
 
     get rightToWorkChecksSection () { return $('//div[@id="navigation-section-list-item-right-to-work-checks"]')}
 
+    get additionalDocumentSection () { return $('//div[@id="navigation-section-list-item-additional-documents"]')}
+
     get logoutBtn () { return $('//button[@id="nav-item-logout"]')}
 
     get discardChangesBtn () { return $('//button[@id="discard-changes-button"]')}
@@ -87,6 +89,13 @@ class sectionScreen {
         browser.pause(1000);
         this.taxAndNextOfKinSection.waitForExist({timeout: 60000});
         this.taxAndNextOfKinSection.click();
+    }
+
+    clickOnAdditionalDocumentSection () {
+        this.additionalDocumentSection.scrollIntoView();
+        browser.pause(1000);
+        this.additionalDocumentSection.waitForExist({timeout: 60000});
+        this.additionalDocumentSection.click();
     }
 
     clickOnDBSDetailsSection () {

@@ -92,6 +92,27 @@ var DataServices = function() {
         }
     }
 
+    this.getAdditionalDocumentInfo = () => {
+        return {
+            "sections": [
+                {
+                    "id": "additional-documents",
+                    "values": {
+                        "TextAdditionalDocuments": [],
+                        "Photo": [
+                            {
+                                "fileName": `${additionalDocument[0][0]}`,
+                                "fileSizeBytes": `${additionalDocument[0][1]}`,
+                                "dateCreated": `${additionalDocument[0][2]}`
+                            }
+                        ],
+                        "TextSignBankDetails": []
+                    }
+                }
+            ]
+        }
+    }
+
     this.getReferencesInfo = () => {
         return {"sections": [
                 {
