@@ -33,6 +33,8 @@ class referenceScreen {
 
     get refTo2 () { return $('//input[@id="Reference-1-ReferencePeriodEndDate"]')}
 
+    get referenceMsg () { return $('//div[@id="statusMessageContent"]')}
+
     assertReferencePageHeader () {
         this.pageHeaderLbl.waitForExist({timeout: 60000});
         expect(this.pageHeaderLbl.getText()).to.equal("8. References");
@@ -163,6 +165,11 @@ class referenceScreen {
         // browser.pause(1000);
         this.enterValueForDateFrom2();
         this.enterValueForDateTo2();
+    }
+
+    assertReferenceMsg () {
+        this.referenceMsg.waitForExist({timeout: 60000});
+        expect(this.referenceMsg.getText()).to.equal("Thank you for completing your references;  we\'ve contacted your referees. This section will remain pending until we recieve your references back. \n\nA member of the team will be in touch if there are any issues. In the meantime, you can continue filling in the rest of your profile.")
     }
 }
 module.exports = new referenceScreen();

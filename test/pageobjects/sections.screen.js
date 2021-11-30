@@ -27,6 +27,12 @@ class sectionScreen {
 
     get additionalDocumentSection () { return $('//div[@id="navigation-section-list-item-additional-documents"]')}
 
+    get workHistorySection () { return $('//div[@id="navigation-section-list-item-work-history"]')}
+
+    get interviewSection () { return $('//div[@id="navigation-section-list-item-interview"]')}
+
+    get occupationalHealthSection () { return $('//div[@id="navigation-section-list-item-occupational-health"]')}
+
     get logoutBtn () { return $('//button[@id="nav-item-logout"]')}
 
     get discardChangesBtn () { return $('//button[@id="discard-changes-button"]')}
@@ -111,6 +117,23 @@ class sectionScreen {
     clickOnRightToWorkChecksSection () {
         this.rightToWorkChecksSection.waitForExist({timeout: 60000});
         this.rightToWorkChecksSection.click();
+    }
+
+    clickOnWorkHistorySection () {
+        this.workHistorySection.waitForExist({timeout: 60000});
+        this.workHistorySection.click();
+    }
+
+    clickOnInterviewSection () {
+        this.interviewSection.waitForExist({timeout: 60000});
+        this.interviewSection.click();
+    }
+
+    clickOnOccupationalHealthSection () {
+        this.occupationalHealthSection.waitForExist({timeout: 60000});
+        this.occupationalHealthSection.scrollIntoView();
+        browser.pause(1000);
+        this.occupationalHealthSection.click();
     }
 }
 module.exports = new sectionScreen();

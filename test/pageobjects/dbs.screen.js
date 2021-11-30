@@ -22,6 +22,8 @@ class dbsScreen {
 
     get sectionStatus () { return $('//div[@id="statusMessageHeader"]/span')}
 
+    get dbsMsg () { return $('//div[@id="statusMessageContent"]')}
+
     get allowOpt () {return $('/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.Button[1]')}
     get fileEle () { return $('//*[contains(@text,"Files")]')}
     get eleDoc () { return $('//*[contains(@text,"file.pdf")]')}
@@ -121,6 +123,11 @@ class dbsScreen {
     assertDBSDetailsSectionStatus () {
         this.sectionStatus.waitForExist({timeout: 60000});
         expect(this.sectionStatus.getText()).to.equal("Pending");
+    }
+
+    assertDBSMsg() {
+        this.dbsMsg.waitForExist({timeout: 60000});
+        expect(this.dbsMsg.getText()).to.equal("Thanks for submitting your DBS details; a member of the team will now review them. If approved, this section will change to ‘Complete’. In the meantime, you can continue filling in the rest of your profile.");
     }
 }
 module.exports = new dbsScreen();

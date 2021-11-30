@@ -36,13 +36,13 @@ class nmcScreen {
             expect(this.nmcStatus.getText()).to.equal("Incomplete");
         }
         else{
-
+            expect(this.nmcStatus.getText()).to.equal("Complete");
         }
     }
 
     assertNMCMessage () {
         this.nmcMsg.waitForExist({timeout: 60000});
-        expect(this.nmcMsg.getText()).to.equal("Thank you – your NMC check has been successful. You simply need to sign your indemnity insurance document to complete this section.");
+        expect(this.nmcMsg.getText()).to.equal("Thank you – your NMC check has been successful. You'll notice some additional fields have appeared below; these detail information regarding your check and are shown for your reference.");
     }
 }
 module.exports = new nmcScreen();
